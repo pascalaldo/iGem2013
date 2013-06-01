@@ -12,6 +12,7 @@ sbmlfile = 'data/msb20127-s3.xml';
 
 model = sbmlimport(sbmlfile);
 
+%% Species
 % Set up the struct of name-index mapping
 % modelStruct.species.dna = 1;
 % Notes:
@@ -34,7 +35,7 @@ end
 
 % Set up the stoichiometry matrix
 % stoichMat = sparse(zeros(#species, #reactions));
-stoichMat = sparse(zeros(1));
+stoichMat = sparse(zeros(length(model.Species),length(model.Reactions)));
 
 % Set the initial condition
 % species = zeros(#species,1);
@@ -45,7 +46,7 @@ for i=1:length(species)
     d(sprintf('Initial amount of species %d (%s) = %d', i, modelStruct.species(i), species(i)));
 end
 
-% Reactions
+%% Reactions
 %
 % Example
 % reactions(#reaction_index).reactant = [1 3];  -Specify which species are used to calculate propensity
@@ -55,17 +56,28 @@ end
 %
 % DNA -> T + DNA, 4
 d('------ Reactions ------');
+reactions = repmat(struct(),length(model.Reactions),1);
 for i=1:length(model.Reactions)
     r = model.Reactions(i);
+    % Add the reactants
     for j=1:length(r.Reactants)
-        reactions(i).reactant(j) = {r.Reactants(j).Name};
+        reactions(i).reactant(j) = modelStruct.speciesID(r.Reactants(j).Name);
+        % Update the stoichiometry matrix
         stoichMat(modelStruct.speciesID(r.Reactants(j).Name), i) = r.Stoichiometry(j);
     end
     for j=1:length(r.Products)
-        reactions(i).product(j) = {r.Products(j).Name};
-        stoichMat(modelStruct.speciesID(r.Reactants(j).Name), i) = r.Stoichiometry(length(r.Reactants)+j);
+        reactions(i).product(j) = modelStruct.speciesID(r.Products(j).Name);
+        % Update the stoichiometry matrix. r.Stoichiometry is a vector with
+        % first the values for the reactants and after that the values for
+        % the products. That's why length(r.Reactants) is added to the
+        % index of r.Stoichiometry.
+        stoichMat(modelStruct.speciesID(r.Products(j).Name), i) = r.Stoichiometry(length(r.Reactants)+j);
     end
     for j=1:length(r.KineticLaw.Parameters)
+        % Get the values for the parameters. The parameters are usually
+        % named k*+ and k*- (where * is for example s or n). To check which
+        % rate the parameter expresses, check the last character of the
+        % name (+ or -). This isn't very elegant, but it works.
         if r.KineticLaw.Parameters(j).Name(end) == '+'
             reactions(i).mesorate_plus = r.KineticLaw.Parameters(j).Value;
         else
