@@ -1,5 +1,5 @@
 function d(message)
-%D Simple debug function
+%d Simple debug function
 try
     DEBUG = evalin('base', 'DEBUG');
     if DEBUG
