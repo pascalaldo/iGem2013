@@ -26,9 +26,10 @@ d('------ Species ------');
 modelStruct.species = containers.Map('KeyType','uint32','ValueType','char');
 modelStruct.speciesID = containers.Map('KeyType','char','ValueType','uint32');
 for i=1:length(model.Species)
-    modelStruct.species(i) = model.Species(i).Name;
-    modelStruct.speciesID(model.Species(i).Name) = i;
-    d(sprintf('Added species %d:''%s''', i, model.Species(i).Name));
+    r = model.Species(i);
+    modelStruct.species(i) = r.Name;
+    modelStruct.speciesID(r.Name) = i;
+    d(sprintf('Added species %d:''%s''', i, r.Name));
 end
 
 % Set up the stoichiometry matrix
@@ -54,9 +55,25 @@ end
 %
 % DNA -> T + DNA, 4
 d('------ Reactions ------');
-reactions(1).reactant = [modelStruct.species.DNA];
-reactions(1).mesorate = 4;
-stoichMat(modelStruct.species.DNA,1) = 1;
+for i=1:length(model.Reactions)
+    r = model.Reactions(i);
+    for j=1:length(r.Reactants)
+        reactions(i).reactant(j) = {r.Reactants(j).Name};
+        stoichMat(modelStruct.speciesID(r.Reactants(j).Name), i) = r.Stoichiometry(j);
+    end
+    for j=1:length(r.Products)
+        reactions(i).product(j) = {r.Products(j).Name};
+        stoichMat(modelStruct.speciesID(r.Reactants(j).Name), i) = r.Stoichiometry(length(r.Reactants)+j);
+    end
+    for j=1:length(r.KineticLaw.Parameters)
+        if r.KineticLaw.Parameters(j).Name(end) == '+'
+            reactions(i).mesorate_plus = r.KineticLaw.Parameters(j).Value;
+        else
+            reactions(i).mesorate_min = r.KineticLaw.Parameters(j).Value;
+        end
+    end
+    d(sprintf('Added reaction %d:''%s''\n\t%s', i, r.Name, r.Reaction));
+end
 
 % Save the data for loading
 save('data.mat','modelStruct','reactions','species','stoichMat');

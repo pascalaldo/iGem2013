@@ -17,8 +17,7 @@ while t(i) < tmax
     p = zeros(reactionSize,1);
 
     for j = 1:n
-        p(j) = prod(species((reactions(j).reactant),i))*reactions(j).mesorate_plus ...
-        - prod(species((reactions(j).product),i))*reactions(j).mesorate_min;
+        p(j) = prod(species((reactions(j).reactant),i))*reactions(j).mesorate_plus - ;
     end
     lamda = cumsum(p);
 
