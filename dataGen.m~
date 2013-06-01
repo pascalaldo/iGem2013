@@ -23,11 +23,9 @@ model = sbmlimport(sbmlfile);
 % There are probably more suitable ways to store this information than
 % structs... ;)
 d('------ Species ------');
-modelStruct.species = containers.Map('KeyType','uint32','ValueType','char');
-modelStruct.speciesID = containers.Map('KeyType','char','ValueType','uint32');
+modelStruct.species = model.Species.Names;
 for i=1:length(model.Species)
-    modelStruct.species(i) = model.Species(i).Name;
-    modelStruct.speciesID(model.Species(i).Name) = i;
+    modelStruct.speciesID
     d(sprintf('Added species %d:''%s''', i, model.Species(i).Name));
 end
 
@@ -41,7 +39,7 @@ stoichMat = sparse(zeros(1));
 species = zeros(length(model.Species),1);
 for i=1:length(species)
     species(i) = model.Species(i).InitialAmount;
-    d(sprintf('Initial amount of species %d (%s) = %d', i, modelStruct.species(i), species(i)));
+    d(sprintf('Initial amount of species %d (%s) = %d', i, modelStruct.species.(sprintf('sp_%d', i)), species(i)));
 end
 
 % Reactions
@@ -53,7 +51,6 @@ end
 % stoichMat(12,#reaction_index) = -1;
 %
 % DNA -> T + DNA, 4
-d('------ Reactions ------');
 reactions(1).reactant = [modelStruct.species.DNA];
 reactions(1).mesorate = 4;
 stoichMat(modelStruct.species.DNA,1) = 1;
