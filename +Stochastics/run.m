@@ -1,6 +1,6 @@
 % Stochastics.run
 
-clear M t a;
+clear i M t a leg;
 
 M = Stochastics.initialize('data/msb20127-s3.xml');
 
@@ -27,4 +27,4 @@ legend(leg);
 title('Multiple Runs');
 xlabel('Time (s)');
 ylabel('Amount (molecules)');
-clear t a;
+clear i M t a leg;
