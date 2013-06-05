@@ -6,6 +6,8 @@ function [t,a] = simulate(M,tmax)
 % points in time the simulation was run and the corresponding amounts of
 % molecules of each species.
 
+% 
+
 % set the maximum simulation time
 % tmax = 10;
 
