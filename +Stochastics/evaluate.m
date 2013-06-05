@@ -1,4 +1,4 @@
-function [t,a] = evaluate(M, n)
+function [t,a] = evaluate(M, n,tmax)
 % STOCHASTICS.EVALUATE runs multiple stochastic simlutions.
 % [t,a] = STOCHASTICS.EVALUATE(M, n) runs n stochastic simulation using the 
 % network defined in struct M. M can be generated using the function
@@ -8,7 +8,7 @@ t = [];
 a = [];
 
 for i=1:n
-    [times,amounts] = Stochastics.simulate(M);
+    [times,amounts] = Stochastics.simulate(M,tmax);
     t = [t times];
     a = [a amounts];
 end
