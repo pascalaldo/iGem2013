@@ -41,7 +41,7 @@ model = sbmlimport(sbmlfile);
 % modified by Yicong
 M.info.species = length(model.Species);
 M.info.reactions = length(model.Reactions);
-M.info.volume = 0.6E-15;    % the volume of E.ocli in L
+M.info.volume = 0.6*10^15;        % the volume of E.ocli in dm^3
 M.info.NA = 6.023E23;       % the Avogadro's constant
 
 %% Species
