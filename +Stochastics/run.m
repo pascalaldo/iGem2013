@@ -10,8 +10,9 @@ for i=1:M.count.species
     leg{i} = M.species.toName(i);
 end
 
+tmax=10;
 
-[t,a] = Stochastics.simulate(M);
+[t,a] = Stochastics.simulate(M,tmax);
 figure(1);
 plot(t,a);
 legend(leg);
@@ -20,7 +21,7 @@ xlabel('Time (s)');
 ylabel('Amount (molecules)');
 clear t a;
 
-[t,a] = Stochastics.evaluate(M,100);
+[t,a] = Stochastics.evaluate(M,100,tmax);
 figure(2);
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
 legend(leg);
