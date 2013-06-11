@@ -12,11 +12,8 @@ end
 
 tmax=10;
 
-<<<<<<< HEAD
 [t,a] = Stochastics.simulate(M,tmax);
-=======
-[t,a] = Stochastics.simulate(M,10);
->>>>>>> 17b484ad3f5d10221150d6500ece1aceac540f1c
+
 figure(1);
 plot(t,a);
 legend(leg);
@@ -25,11 +22,8 @@ xlabel('Time (s)');
 ylabel('Amount (molecules)');
 clear t a;
 
-<<<<<<< HEAD
 [t,a] = Stochastics.evaluate(M,100,tmax);
-=======
-[t,a] = Stochastics.evaluate(M,100,10);
->>>>>>> 17b484ad3f5d10221150d6500ece1aceac540f1c
+
 figure(2);
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
 legend(leg);
