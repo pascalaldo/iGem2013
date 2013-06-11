@@ -6,11 +6,6 @@ function M = initialize(sbmlfile)
 % of the model. M can be used as an input argument for the function
 % Stochastics.Simulate(M). The structure of M looks like this:
 %
-<<<<<<< HEAD
-%
-=======
-% Pascal :) !
->>>>>>> 1e5ed0975f0feb11ffa37920761868470d3022ad
 % M
 %  .info
 %        .volume                 - The volume of E.coli
