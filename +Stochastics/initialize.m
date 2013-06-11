@@ -6,6 +6,7 @@ function M = initialize(sbmlfile)
 % of the model. M can be used as an input argument for the function
 % Stochastics.Simulate(M). The structure of M looks like this:
 %
+% Pascal :)
 % M
 %  modified by Yicong from
 %  .count
