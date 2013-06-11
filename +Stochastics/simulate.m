@@ -15,10 +15,10 @@ t(i) = 0;
 
 while t(i) < tmax
 
-    p = zeros(M.count.reactions,1);
-    q = zeros(M.count.reactions,1);
+    p = zeros(M.info.reactions,1);
+    q = zeros(M.info.reactions,1);
     
-    for j = 1:M.count.reactions
+    for j = 1:M.info.reactions
         p(j) = prod(M.amounts((M.reactions(j).reactant),i))*M.reactions(j).mesorate_plus;
         q(j) = prod(M.amounts((M.reactions(j).product),i))*M.reactions(j).mesorate_min; % Reverse reaction
     end
@@ -32,10 +32,10 @@ while t(i) < tmax
     % decide which reaction
     flag = find( (lamda - rand(1)*lamda(end)) >0, 1);
 
-    if flag <= M.count.reactions
+    if flag <= M.info.reactions
         M.amounts(:,i) = M.amounts(:,i-1) + M.stoichiometry(:,flag);
     else % Reverse reaction
-        M.amounts(:,i) = M.amounts(:,i-1) - M.stoichiometry(:,flag-M.count.reactions);
+        M.amounts(:,i) = M.amounts(:,i-1) - M.stoichiometry(:,flag-M.info.reactions);
     end
 end
 

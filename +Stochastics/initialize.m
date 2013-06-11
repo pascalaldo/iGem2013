@@ -54,7 +54,7 @@ M.info.NA = 6.023E23;       % the Avogadro's constant
 d('------ Species ------');
 M.species.toName = containers.Map('KeyType','uint32','ValueType','char');
 M.species.toID = containers.Map('KeyType','char','ValueType','uint32');
-for i=1:M.count.species;
+for i=1:M.info.species;
     r = model.Species(i);
     M.species.toName(i) = r.Name;
     M.species.toID(r.Name) = i;
@@ -62,11 +62,11 @@ for i=1:M.count.species;
 end
 
 % Set up the stoichiometry matrix
-M.stoichiometry = sparse(zeros(M.count.species,M.count.reactions));
+M.stoichiometry = sparse(zeros(M.info.species,M.info.reactions));
 
 % Set the initial condition
-M.amounts = zeros(M.count.species,1);
-for i=1:M.count.species
+M.amounts = zeros(M.info.species,1);
+for i=1:M.info.species
     M.amounts(i) = model.Species(i).InitialAmount;
     d(sprintf('Initial amount of %s = %d', M.species.toName(i), M.amounts(i)));
 end
@@ -74,9 +74,10 @@ end
 %% Reactions
 %
 d('------ Reactions ------');
-M.reactions = repmat(struct(),M.count.reactions,1);
-for i=1:M.count.reactions
+M.reactions = repmat(struct(),M.info.reactions,1);
+for i=1:M.info.reactions
     r = model.Reactions(i);
+    M.reactions(i).equation = r.Reaction;
     % Add the reactants
     for j=1:length(r.Reactants)
         M.reactions(i).reactant(j) = M.species.toID(r.Reactants(j).Name);
