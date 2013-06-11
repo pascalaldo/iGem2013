@@ -8,12 +8,8 @@ function M = initialize(sbmlfile)
 %
 % Pascal :)
 % M
-%  modified by Yicong from
-%  .count
-%  to
 %  .info
 %        .volume                 - The volume of E.coli
-%  modified by Yicong
 %        .species                - The number of species in the model
 %        .reactions              - The number of reactions in the model
 %  .species
