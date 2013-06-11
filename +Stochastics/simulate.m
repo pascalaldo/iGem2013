@@ -1,4 +1,4 @@
-function [t,a] = simulate(M,tmax)
+function [t,a] = simulate(M)
 % STOCHASTICS.SIMULATE runs a stochastic simlution.
 % [t,a] = STOCHASTICS.SIMULATE(M) runs a stochastic simulation using the 
 % network defined in struct M. M can be generated using the function
@@ -7,7 +7,7 @@ function [t,a] = simulate(M,tmax)
 % molecules of each species.
 
 % set the maximum simulation time
-% tmax = 10;
+tmax = 10;
 
 % Initialization
 i = 1;
