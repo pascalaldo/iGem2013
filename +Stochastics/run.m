@@ -5,8 +5,8 @@ clear i M t a leg;
 M = Stochastics.initialize('data/msb20127-s3.xml');
 
 % Create a legend
-leg = cell(M.count.species,1);
-for i=1:M.count.species
+leg = cell(M.info.species,1);
+for i=1:M.info.species
     leg{i} = M.species.toName(i);
 end
 
