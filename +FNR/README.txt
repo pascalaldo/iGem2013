@@ -9,7 +9,7 @@ This part simulates the process FNR interacts with O2. The equations and data us
 The reaction is modeled as:
 
           kplus      k2
-O2 + FNR <-> o2¡-FNR -> product
+O2 + FNR <-> o2-FNR -> product
          kminus
 
 The original estimate of rates are:
