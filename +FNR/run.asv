@@ -1,0 +1,11 @@
+% FNR.run
+
+x0 = [400 5 0 0]; %(uM)
+
+% Integrate ODEs:
+tspan = [0 50]; %(s)
+[t,x] = ode45(@ode,tspan,x0); %Runge-Kutta
+% Plot results:
+figure; plot(t,x(:,1),t,x(:,2),t,x(:,3),t,x(:,4));
+legend('O2','FNR','O2-FNR','Product');
+
