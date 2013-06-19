@@ -3,22 +3,21 @@ function f = ode(t,x)
 % See details of the model in README.txt
 
 % state variables
-a = x(1);       % O2
-b = x(2);       % FNR
-c = x(3);       % O2-FNR
-d = x(4);       % product
+a = x(1);       % FNR
+b = x(2);       % O2-FNR
+c = x(3);       % O2
 
-% parameters [uM]
-kplus = 80000;
-kminus = 408;
-k2 = 0.0682;
+% Parameters [uM]
+a = 0.0682;
+b = 408;
+kobs = a*c/(b+c);
 
 % ODEs
-f(1) = kminus*c - kplus*a*b;
-f(2) = kminus*c - kplus*a*b;
-f(3) = kplus*a*b - kminus*c - k2*c;
-f(4) = k2*c;
+f(1) = -kobs*x(1);
+f(2) = kobs*x(1);
+f(3) = 0;
 
 f = f(:);
+
 end
 
