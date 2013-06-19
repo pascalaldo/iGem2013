@@ -2,17 +2,15 @@ This part simulates the process FNR interacts with O2. The equations and data us
 
 - a constant level of FNR(including O2-FNR) in the E.coli
 - no effect in the rate of O2-induced Fe2+ release from 4Fe-FNR in the presence and absense of DNA
-- in the temperature of 25¡æ
+- in the temperature of 25C
 - the loss of O2 is negligible
 
 
 The reaction is modeled as:
 
-          kplus      k2
-O2 + FNR <-> O2-FNR -> product
-         kminus
+          kobs
+O2 + FNR <------> product
 
-The original estimate of rates are:
-kplus = 80000 (uM*s)^(-1)
-kminus = 408 uM/s
-k2 = 0.0682 s^(-1)
+kobs = a*[O2]/(b+[O2])
+a = 0.0682
+b = 408 uM
