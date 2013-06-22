@@ -3,8 +3,6 @@ function f = ode(t,x)
 % See details of the model in README.txt
 
 % state variables
-a = x(1);       % FNR
-b = x(2);       % O2-FNR
 c = x(3);       % O2
 
 % Parameters [uM]
