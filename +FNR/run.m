@@ -2,7 +2,7 @@
 
 clear x0 tspan;
 
-x0 = [5 0 40]; %(uM) [FNR O2-FNR O2]
+x0 = [5 0 40]; %(uM) The concentration of [FNR O2-FNR O2]
 d('Initial concentrations in uM');
 d(sprintf('O2: %d', x0(3)));
 d(sprintf('FNR: %d', x0(1)));
