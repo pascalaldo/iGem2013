@@ -3,7 +3,7 @@ function f = ode(t,x,oxygen)
 % See details of the model in README.txt
 
 % Set environment to anaerobic
-env = 2;
+env = (oxygen<10)+1;
 
 %% State Variables
 x1 = x(1); % FNR mRNA
