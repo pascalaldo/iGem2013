@@ -8,8 +8,8 @@ This part simulates the process FNR interacts with O2. The equations and data us
 
 The reaction is modeled as:
 
-          kobs
-O2 + FNR <------> O2-FNR
+      kobs
+FNR <------> O2-FNR
 
 kobs = a*[O2]/(b+[O2])
 a = 0.0682

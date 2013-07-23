@@ -22,7 +22,6 @@ ylabel('concentration (µM)');
 
 clear oxygen t x;
 
-
 O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
 xs = [];
 for i=O2

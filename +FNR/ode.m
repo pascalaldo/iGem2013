@@ -2,7 +2,6 @@ function f = ode(t,x,oxygen)
 % f = ode(t,x) includes the differential equations used in the model
 % See details of the model in README.txt
 
-% Set environment to anaerobic
 env = (oxygen<10)+1;
 
 %% State Variables
