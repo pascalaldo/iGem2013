@@ -1,8 +1,8 @@
 function [t,a] = simulate(M,tmax)
-% STOCHASTICS.SIMULATE runs a stochastic simlution.
-% [t,a] = STOCHASTICS.SIMULATE(M) runs a stochastic simulation using the 
+% DECOY.SIMULATE runs a stochastic simlution.
+% [t,a] = DECOY.SIMULATE(M) runs a stochastic simulation using the 
 % network defined in struct M. M can be generated using the function
-% Stochastics.initialize(sbmlfile). This function returns the different 
+% Decoy.initialize(sbmlfile). This function returns the different 
 % points in time the simulation was run and the corresponding amounts of
 % molecules of each species.
 

@@ -31,10 +31,10 @@ x6      = oxygen;
 x3c     = 0.389;
 
 %% ODEs
-if x(3) < x3c
-    f(1) = a1max - b1(env)*x(1);
+if x3 < x3c
+    f(1) = a1max - b1(env)*x1;
 else
-    f(1) = a1*(x3^g13) - b1(env)*x(1);
+    f(1) = a1*(x3^g13) - b1(env)*x1;
 end
 f(2) = a21*x1 + 2*a22*x3*x6 - b21(env)*x2*x4 - 2*b22*(x2^2)*x5;
 f(3) = b22*(x2^2)*x5 - a22*x3*x6 - b31(env)*x3;
