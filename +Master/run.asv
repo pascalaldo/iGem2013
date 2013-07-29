@@ -1,8 +1,7 @@
 % Master.run
 % This part combines the stochastic model (Decoy) and the ODE model (FNR).
 
-close all
-clear xstep x tt tstepODE tstepDecoy tODE t oxygen i amountPlus M;
+clear 
 
 tt = 10;                       % Assign total simulation time
 x = [0.16 4.63 0.08];          % (uM) [mRNA inactiveFNR activeFNR]
@@ -32,17 +31,10 @@ while t(i) < tt
     if i==2                                 % For the first loop
         [tstepODE,xstep] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),t,x);
         tODE = [tODE; tstepODE];            % Update ODE time vector
-        x = [x; xstep];                          % Update ODE species vector
+        x = xstep;                          % Update ODE species vector
     else
         [tstepODE,xstep] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),t([i-1,i]),x(end,:));
         tODE = [tODE; tstepODE];            % Update ODE time vector
-        x = [x; xstep];                          % Update ODE species vector
+        x = xstep;                          % Update ODE species vector
     end
 end
-
-% Plot the stochastic result and ODE result in one figure
-plotyy(tODE,x,t,M.amounts)
-
-% Plot the promoter binding ratio
-figure
-plot(t,M.amounts(7,:)./M.amounts(8,:));
