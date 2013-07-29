@@ -5,5 +5,6 @@ function nr = mol2nr( M,umol)
 % the volume of E.coli in M struct.
 
 nr = umol * M.info.volume * M.info.NA / 1000;
+nr = round(nr);
 
 end
