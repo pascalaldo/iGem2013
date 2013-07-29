@@ -1,4 +1,4 @@
-function [t,amountPlus] = stepSim(M)
+function [tstep,amountPlus] = stepSim(M)
 % DECOY.STEPSIM runs a single-step stochastic simlution.
 % [t,a] = DECOY.STEPSIM(M) runs a single-step stochastic simulation using 
 % the molecule amounts given in 'M'. This function returns step time
@@ -16,7 +16,7 @@ end
 lamda = cumsum([p;q]);
 
 % calculate the time step
-t = exprnd(1/lamda(end));
+tstep = exprnd(1/lamda(end));
 
 % decide which reaction
 flag = find( (lamda - rand(1)*lamda(end)) >0, 1);
