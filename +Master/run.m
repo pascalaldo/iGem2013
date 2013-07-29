@@ -6,7 +6,7 @@ clear xstep x tt tstepODE tstepDecoy tODE t oxygen i amountPlus M;
 
 tt = 10;                       % Assign total simulation time
 x = [0.16 4.63 0.08];          % (uM) [mRNA inactiveFNR activeFNR]
-oxygen = @(t)(0);
+oxygen = @(t)(00);
 
 M = Decoy.initialize('data/msb20127-s2.xml');
 
@@ -45,4 +45,4 @@ plotyy(tODE,x,t,M.amounts)
 
 % Plot the promoter binding ratio
 figure
-plot(t,M.amounts(7,:)./M.amounts(8,:));
+stairs(t,M.amounts(7,:)./M.amounts(8,:));
