@@ -1,0 +1,275 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9482,        266]
+NotebookOptionsPosition[      9072,        247]
+NotebookOutlinePosition[      9430,        263]
+CellTagsIndexPosition[      9387,        260]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a1", "=", "0.0871"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"a1max", "=", "0.135"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"a21", "=", "0.484"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"a22", "=", "4.09"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b22", "=", "2.6"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b1", "=", 
+   RowBox[{"{", 
+    RowBox[{"0.838", ",", "0.613"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b21", "=", 
+   RowBox[{"{", 
+    RowBox[{"0.0821", ",", "0.0634"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b31", "=", 
+   RowBox[{"{", 
+    RowBox[{"0.0231", ",", "0.0148"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"g13", "=", 
+   RowBox[{"-", "0.464"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"x4", "=", "0.196"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"x5", "=", "0.455"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"x3c", "=", "0.389"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5837507799979153`*^9, 3.583750836890101*^9}, {
+  3.58375100920748*^9, 3.583751021685584*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FNRSolve", "[", "oxygen_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x6", ",", "env", ",", "sol"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"x6", "=", "oxygen"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"env", "=", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"x6", "<", "10"}], ",", "2", ",", "1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sol", "=", 
+      RowBox[{"NDSolve", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"x1", "'"}], "[", "t", "]"}], "\[Equal]", 
+           RowBox[{"Piecewise", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"a1max", "-", 
+                 RowBox[{
+                  RowBox[{
+                  "b1", "\[LeftDoubleBracket]", "env", 
+                   "\[RightDoubleBracket]"}], "*", 
+                  RowBox[{"x1", "[", "t", "]"}]}]}], ",", 
+                RowBox[{
+                 RowBox[{"x3", "[", "t", "]"}], "<", "x3c"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"a1", "*", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"x3", "[", "t", "]"}], "^", "g13"}], ")"}]}], "-", 
+                 RowBox[{
+                  RowBox[{
+                  "b1", "\[LeftDoubleBracket]", "env", 
+                   "\[RightDoubleBracket]"}], "*", 
+                  RowBox[{"x1", "[", "t", "]"}]}]}], ",", 
+                RowBox[{
+                 RowBox[{"x3", "[", "t", "]"}], ">=", "x3c"}]}], "}"}]}], 
+             "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"x2", "'"}], "[", "t", "]"}], "\[Equal]", 
+           RowBox[{
+            RowBox[{"a21", "*", 
+             RowBox[{"x1", "[", "t", "]"}]}], "+", 
+            RowBox[{"2", "*", "a22", "*", 
+             RowBox[{"x3", "[", "t", "]"}], "*", "x6"}], "-", 
+            RowBox[{
+             RowBox[{
+             "b21", "\[LeftDoubleBracket]", "env", "\[RightDoubleBracket]"}], 
+             "*", 
+             RowBox[{"x2", "[", "t", "]"}], "*", "x4"}], "-", 
+            RowBox[{"2", "*", "b22", "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"x2", "[", "t", "]"}], "^", "2"}], ")"}], "*", 
+             "x5"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"x3", "'"}], "[", "t", "]"}], "\[Equal]", 
+           RowBox[{
+            RowBox[{"b22", "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"x2", "[", "t", "]"}], "^", "2"}], ")"}], "*", "x5"}], 
+            "-", 
+            RowBox[{"a22", "*", 
+             RowBox[{"x3", "[", "t", "]"}], "*", "x6"}], "-", 
+            RowBox[{
+             RowBox[{
+             "b31", "\[LeftDoubleBracket]", "env", "\[RightDoubleBracket]"}], 
+             "*", 
+             RowBox[{"x3", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+          
+          RowBox[{
+           RowBox[{"x1", "[", "0", "]"}], "\[Equal]", "0.16"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"x2", "[", "0", "]"}], "\[Equal]", "4.63"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"x3", "[", "0", "]"}], "\[Equal]", "0.08"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x1", ",", "x2", ",", "x3"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", "900"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Column", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"x1", "[", "t", "]"}], "/.", "sol"}], ",", 
+            RowBox[{
+             RowBox[{"x2", "[", "t", "]"}], "/.", "sol"}], ",", 
+            RowBox[{
+             RowBox[{"x3", "[", "t", "]"}], "/.", "sol"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "900"}], "}"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"Blue", ",", "Red", ",", "Green"}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"Text", "[", "\"\<\!\(\*
+StyleBox[\"FNR\",
+FontColor->RGBColor[0, 0, 1]]\)\!\(\*
+StyleBox[\" \",
+FontColor->RGBColor[0, 0, 1]]\)\!\(\*
+StyleBox[\"mRNA\",
+FontColor->RGBColor[0, 0, 1]]\), \!\(\*
+StyleBox[\"Inactive\",
+FontColor->RGBColor[1, 0, 0]]\)\!\(\*
+StyleBox[\" \",
+FontColor->RGBColor[1, 0, 0]]\)\!\(\*
+StyleBox[\"FNR\",
+FontColor->RGBColor[1, 0, 0]]\), \!\(\*
+StyleBox[\"Active\",
+FontColor->RGBColor[0, 1, 0]]\)\!\(\*
+StyleBox[\" \",
+FontColor->RGBColor[0, 1, 0]]\)\!\(\*
+StyleBox[\"FNR\",
+FontColor->RGBColor[0, 1, 0]]\)\>\"", "]"}]}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.5837523361151123`*^9, 3.5837524242434273`*^9}, {
+  3.583752570214674*^9, 3.583752630567092*^9}, {3.583752663718614*^9, 
+  3.583752682193771*^9}, {3.583752802364088*^9, 3.583752813696179*^9}, {
+  3.583752864926186*^9, 3.583752887349248*^9}, {3.5837529316547327`*^9, 
+  3.583753003502428*^9}, {3.583753045979095*^9, 3.583753137800536*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"FNRSolve", "[", "oxygen", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"oxygen", ",", "0", ",", "20"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.583752248084132*^9, 3.583752249493761*^9}, {
+  3.583752437999633*^9, 3.583752473958749*^9}, {3.583753216917163*^9, 
+  3.5837532172274523`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`oxygen$$ = 16.95827865600586, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`oxygen$$], 0, 20}}, Typeset`size$$ = {
+    495., {165., 170.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`oxygen$3369$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`oxygen$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`oxygen$$, $CellContext`oxygen$3369$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`FNRSolve[$CellContext`oxygen$$], 
+      "Specifications" :> {{$CellContext`oxygen$$, 0, 20}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{540., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.583752441670384*^9, 3.583752475374757*^9, 
+  3.583752640202878*^9, 3.583752827878181*^9, 3.583752944417829*^9, 
+  3.583753061961281*^9, 3.5837531871047153`*^9, 3.583753217683895*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 755},
+WindowMargins->{{Automatic, 142}, {Automatic, 57}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 996, 33, 240, "Input"],
+Cell[1556, 55, 5391, 141, 316, "Input"],
+Cell[CellGroupData[{
+Cell[6972, 200, 358, 8, 30, "Input"],
+Cell[7333, 210, 1723, 34, 462, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
