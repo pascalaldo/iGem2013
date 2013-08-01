@@ -1,8 +1,8 @@
-% Stochastics.run
+% Decoy.run
 
 clear i M t a leg;
 
-M = Stochastics.initialize('data/msb20127-s3.xml');
+M = Decoy.initialize('data/msb20127-s3.xml');
 
 % Create a legend
 leg = cell(M.info.species,1);
@@ -12,7 +12,7 @@ end
 
 tmax=10;
 
-[t,a] = Stochastics.simulate(M,tmax);
+[t,a] = Decoy.simulate(M,tmax);
 figure(1);
 plot(t,a);
 legend(leg);
@@ -21,7 +21,7 @@ xlabel('Time (s)');
 ylabel('Amount (molecules)');
 clear t a;
 
-[t,a] = Stochastics.evaluate(M,100,tmax);
+[t,a] = Decoy.evaluate(M,100,tmax);
 
 figure(2);
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
