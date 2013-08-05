@@ -1,81 +1,83 @@
-% initialize.m genedatas the data in the workspace.
+% initialize.m geneFNRdatas the FNRdata in the workspace.
 % oxygen is not included in the struct
 % concentrations in [uM]
-% datas in [uM/min]
+% FNRdatas in [uM/min]
+% a - aerobic
+% n - anaerobic
 
 clear i;
-data.toID = containers.Map('KeyType','char','ValueType','uint32');
+FNRdata.toID = containers.Map('KeyType','char','ValueType','uint32');
 i = 1;
 
-data.toID('mRNA') = i;
-data.values(i) = 0.16;
+FNRdata.toID('mRNA') = i;
+FNRdata.values(i) = 0.16;
 
 i = i+1;
-data.toID('inactiveFNR') = i;
-data.values(i) = 4.63;
+FNRdata.toID('inactiveFNR') = i;
+FNRdata.values(i) = 4.63;
 
 i = i+1;
-data.toID('activeFNR') = i;
-data.values(i) = 0.08;
+FNRdata.toID('activeFNR') = i;
+FNRdata.values(i) = 0.08;
 
 i = i+1;
-data.toID('a1') = i;
-data.values(i) = 0.0871;
+FNRdata.toID('a1') = i;
+FNRdata.values(i) = 0.0871;
 
 i = i+1;
-data.toID('a1max') = i;
-data.values(i) = 0.135
+FNRdata.toID('a1max') = i;
+FNRdata.values(i) = 0.135;
 
 i = i+1;
-data.toID('a21') = i;
-data.values(i) = 0.484
+FNRdata.toID('a21') = i;
+FNRdata.values(i) = 0.484;
 
 i = i+1;
-data.toID('a22') = i;
-data.values(i) = 4.09;
+FNRdata.toID('a22') = i;
+FNRdata.values(i) = 4.09;
 
 i = i+1;
-data.toID('b22') = i;
-data.values(i) = 2.6;
+FNRdata.toID('b22') = i;
+FNRdata.values(i) = 2.6;
 
 i = i+1;
-data.toID('b1a') = i;
-data.values(i) = 0.838;
+FNRdata.toID('b1a') = i;
+FNRdata.values(i) = 0.838;
 
 i = i+1;
-data.toID('b1n') = i;
-data.values(i) = 0.613;
+FNRdata.toID('b1n') = i;
+FNRdata.values(i) = 0.613;
 
 i = i+1;
-data.toID('b21a') = i;
-data.values(i) = 0.0821;
+FNRdata.toID('b21a') = i;
+FNRdata.values(i) = 0.0821;
 
 i = i+1;
-data.toID('b21n') = i;
-data.values(i) = 0.0634;
+FNRdata.toID('b21n') = i;
+FNRdata.values(i) = 0.0634;
 
 i = i+1;
-data.toID('b31a') = i;
-data.values(i) = 0.0231;
+FNRdata.toID('b31a') = i;
+FNRdata.values(i) = 0.0231;
 
 i = i+1;
-data.toID('b31n') = i;
-data.values(i) = 0.0148;
+FNRdata.toID('b31n') = i;
+FNRdata.values(i) = 0.0148;
 
 i = i+1;
-data.toID('g13') = i;
-data.values(i) = -0.464;
+FNRdata.toID('g13') = i;
+FNRdata.values(i) = -0.464;
 
 i = i+1;
-data.toID('x4') = i;
-data.values(i) = 0.196
+FNRdata.toID('x4') = i;
+FNRdata.values(i) = 0.196;
 
 i = i+1;
-data.toID('x5') = i;
-data.values(i) = 0.455;
+FNRdata.toID('x5') = i;
+FNRdata.values(i) = 0.455;
 
 i = i+1;
-data.toID('x3c') = i;
-data.values(i) = 0.389;
+FNRdata.toID('x3c') = i;
+FNRdata.values(i) = 0.389;
 
 clear i

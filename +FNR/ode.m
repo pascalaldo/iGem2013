@@ -1,13 +1,13 @@
-function f = ode(t,oxygen,data)
+function f = ode(t,x,oxygen,data)
 % f = ode(t,x) includes the differential equations used in the model
 % See details of the model in README.txt
 
 env = (oxygen<10)+1;
 
 %% State Variables
-x1 = data.values(data.toID('mRNA')); % FNR mRNA
-x2 = data.values(data.toID('inactiveFNR')); % Inactive FNR
-x3 = data.values(data.toID('activeFNR')); % Active FNR
+x1 = x(1); % FNR mRNA
+x2 = x(2); % Inactive FNR
+x3 = x(3); % Active FNR
 
 %% Parameters [uM]
 % par(1) = off state (aerobic)
