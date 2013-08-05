@@ -12,7 +12,7 @@ oxygen = @(t)(0);
 % Integrate ODEs:
 tspan = [0 900]; %(s)
 d(sprintf('Simulated time: %d seconds', tspan(2)));
-[t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),tspan,x0); %Runge-Kutta
+[t,x] = ode45(@(t,x)FNR.ode(t,oxygen(t),data),tspan,x0); %Runge-Kutta
 
 % Plot results:
 figure; plot(t,x);
@@ -22,15 +22,15 @@ ylabel('concentration (µM)');
 
 clear oxygen t x;
 
-O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
-xs = [];
-for i=O2
-    xs = [xs; FNR.steadystate(i, 15)];
-end
-
-figure; loglog(O2',xs);
-legend('mRNA', 'Inactive FNR','Active FNR');
-xlabel('oxygen concentration (µM)');
-ylabel('concentration (µM)');
+% O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
+% xs = [];
+% for i=O2
+%     xs = [xs; FNR.steadystate(i, 15)];
+% end
+% 
+% figure; loglog(O2',xs);
+% legend('mRNA', 'Inactive FNR','Active FNR');
+% xlabel('oxygen concentration (µM)');
+% ylabel('concentration (µM)');
 
 clear x0 tspan;

@@ -1,34 +1,34 @@
-function f = ode(t,x,oxygen)
+function f = ode(t,oxygen,data)
 % f = ode(t,x) includes the differential equations used in the model
 % See details of the model in README.txt
 
 env = (oxygen<10)+1;
 
 %% State Variables
-x1 = x(1); % FNR mRNA
-x2 = x(2); % Inactive FNR
-x3 = x(3); % Active FNR
+x1 = data.values(data.toID('mRNA')); % FNR mRNA
+x2 = data.values(data.toID('inactiveFNR')); % Inactive FNR
+x3 = data.values(data.toID('activeFNR')); % Active FNR
 
 %% Parameters [uM]
 % par(1) = off state (aerobic)
 % par(2) = on state (anaerobic)
 
-a1      = 0.0871;
-a1max   = 0.135;
-a21     = 0.484;
-a22     = 4.09;
-b22     = 2.6;
-b1(1)   = 0.838;
-b1(2)   = 0.613;
-b21(1)  = 0.0821;
-b21(2)  = 0.0634;
-b31(1)  = 0.0231;
-b31(2)  = 0.0148;
-g13     = -0.464;
-x4      = 0.196;
-x5      = 0.455;
+a1      = data.values(data.toID('a1'));
+a1max   = data.values(data.toID('a1max'));
+a21     = data.values(data.toID('a21'));
+a22     = data.values(data.toID('a22'));
+b22     = data.values(data.toID('b22'));
+b1(1)   = data.values(data.toID('b1a'));
+b1(2)   = data.values(data.toID('b1n'));
+b21(1)  = data.values(data.toID('b21a'));
+b21(2)  = data.values(data.toID('b21n'));
+b31(1)  = data.values(data.toID('b31a'));
+b31(2)  = data.values(data.toID('b31n'));
+g13     = data.values(data.toID('g13'));
+x4      = data.values(data.toID('x4'));
+x5      = data.values(data.toID('x5'));
 x6      = oxygen;
-x3c     = 0.389;
+x3c     = data.values(data.toID('x3c'));
 
 %% ODEs
 if x3 < x3c
