@@ -36,7 +36,7 @@ while t(i) < tt
     t(i) = t(i-1) + tstep;
     
     % run the ODE simulation
-    x = [x; x(end,:)+FNR.ode(t(i-1),x(end,:),oxygen)'.*tstep];
+    x = [x; x(end,:)+FNR.ode(t(i-1),x(end,:),oxygen,FNRdata)'.*tstep];
 end
 
 % Plot the stochastic result and ODE result in one figure
