@@ -24,16 +24,16 @@ xlabel('time (min)');
 ylabel('concentration (µM)');
 
 clear oxygen t x;
-% 
-% O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
-% xs = [];
-% for i=O2
-%     xs = [xs; FNR.steadystate(i, 15)];
-% end
-% 
-% figure; loglog(O2',xs);
-% legend('mRNA', 'Inactive FNR','Active FNR');
-% xlabel('oxygen concentration (µM)');
-% ylabel('concentration (µM)');
-% 
+
+O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
+xs = [];
+for i=O2
+    xs = [xs; FNR.steadystate(i, 15, FNRdata)];
+end
+
+figure; loglog(O2',xs);
+legend('mRNA', 'Inactive FNR','Active FNR');
+xlabel('oxygen concentration (µM)');
+ylabel('concentration (µM)');
+
 clear x0 tspan;

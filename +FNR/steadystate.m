@@ -1,4 +1,4 @@
-function steady = steadystate(O2, tmax)
+function steady = steadystate(O2, tmax,FNRdata)
 %STEADYSTATE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -9,7 +9,7 @@ oxygen = @(t)(O2);
 % Integrate ODEs:
 tspan = [0 tmax]; %(s)
 d(sprintf('Simulated time: %d seconds', tspan(2)));
-[t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),tspan,x0); %Runge-Kutta
+[t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t),FNRdata),tspan,x0); %Runge-Kutta
 
 steady = x(end,:);
 
