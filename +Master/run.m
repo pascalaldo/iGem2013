@@ -9,7 +9,7 @@ x = [0.16 4.63 0.08];          % (uM) [mRNA inactiveFNR activeFNR]
 oxygen = 0;
 
 M = Decoy.initialize('data/msb20127-s2.xml');
-
+FNR.initialize;
 % Initialization
 i = 1;
 t(i) = 0;
