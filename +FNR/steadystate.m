@@ -8,7 +8,7 @@ oxygen = @(t)(O2);
 
 % Integrate ODEs:
 tspan = [0 tmax]; %(s)
-d(sprintf('Simulated time: %d seconds', tspan(2)));
+d(sprintf('Simulated time: %d min', tspan(2)));
 [t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),tspan,x0); %Runge-Kutta
 
 steady = x(end,:);
