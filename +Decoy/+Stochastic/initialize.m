@@ -37,6 +37,7 @@ M.info.species = 8;
 M.info.reactions = 2;
 M.info.volume = 0.6E-15;    % the volume of E.ocli in L
 M.info.NA = 6.023E23;       % the Avogadro's constant
+M.info.copyNumber = 17.5;
 
 %% Species
 % Set up the struct of name-index mapping
@@ -92,7 +93,7 @@ M.stoichiometry(6,2) = -1;
 M.stoichiometry(7,2) = 1;
 
 % Set the initial condition
-M.amounts = [500; 500; 100; 0; 100; 7; 0; 7];
+M.amounts = round([500; 500; 100; 0; 100; 7; 0; 7].*M.info.copyNumber);
 
 %% Reactions
 %
