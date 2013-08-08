@@ -18,15 +18,8 @@ while t(i) < tmax
     q = zeros(M.info.reactions,1);
     
     for j = 1:M.info.reactions
-        %d(sprintf('reaction=%d',j));
-        %d(M.amounts((M.reactions(j).reactant),i));
-        %d(prod(M.amounts((M.reactions(j).reactant),i).^(-M.stoichiometry(M.reactions(j).reactant,j))));
-        %d(M.amounts((M.reactions(j).product),i));
-        %d(prod(M.amounts((M.reactions(j).product),i).^(M.stoichiometry(M.reactions(j).product,j))));
         p(j) = prod(M.amounts((M.reactions(j).reactant),i).^(-M.stoichiometry(M.reactions(j).reactant,j)))*M.reactions(j).mesorate_plus(env,x1,x3,x6);
         q(j) = prod(M.amounts((M.reactions(j).product),i).^(M.stoichiometry(M.reactions(j).product,j)))*M.reactions(j).mesorate_min(env,x1,x3,x6); % Reverse reaction
-        %p(j) = prod(M.amounts((M.reactions(j).reactant),i))*M.reactions(j).mesorate_plus(env,x1,x3,x6);
-        %q(j) = prod(M.amounts((M.reactions(j).product),i))*M.reactions(j).mesorate_min(env,x1,x3,x6); % Reverse reaction
     end
     lamda = cumsum([p;q]);
 

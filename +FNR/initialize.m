@@ -94,7 +94,7 @@ M.amounts = [1; 58; 1673; 29];
 
 %% Reactions
 %
-NV = M.info.NA*M.info.volume*10^(-6);
+NV = M.info.NA*M.info.volume*10^(-6); % conversion factor for µM to molecs.
 
 d('------ Reactions ------');
 d('Reaction 1:');
