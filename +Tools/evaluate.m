@@ -8,7 +8,7 @@ t = [];
 a = [];
 
 for i=1:n
-    [times,amounts] = Decoy.simulate(M,tmax);
+    [times,amounts] = Tools.simulate(M,tmax);
     t = [t times];
     a = [a amounts];
 end

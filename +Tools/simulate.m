@@ -1,18 +1,22 @@
-function [t,a] = simulate(M,oxygen,tmax)
-% FNR.SIMULATE runs a stochastic simlution.
-% [t,a] = FNR.SIMULATE(M,tmax) runs a stochastic simulation using the 
+function [t,a] = simulate(M,tmax)
+% TOOLS.SIMULATE runs a stochastic simlution.
+% [t,a] = TOOLS.SIMULATE(M,tmax) runs a stochastic simulation using the 
 % network defined in struct M.
 
 % Initialization
 i = 1;
 t(i) = 0;
 
-while t(i) < tmax
+FNRModel = strcmp(M.info.model, 'FNR');
+x1 = 0; x3 = 0; x6 = 0; env = 0;
 
-    x1 = M.amounts(2,i);
-    x3 = M.amounts(4,i);
-    x6 = oxygen;
-    env = (x6<10)+1;
+while t(i) < tmax
+    if FNRModel
+        x1 = M.amounts(2,i);
+        x3 = M.amounts(4,i);
+        x6 = M.info.oxygen;
+        env = (x6<10)+1;
+    end
 
     p = zeros(M.info.reactions,1);
     q = zeros(M.info.reactions,1);

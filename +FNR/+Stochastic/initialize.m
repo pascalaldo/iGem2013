@@ -31,10 +31,12 @@ function M = initialize()
 % M.count.species = length(model.Species);
 % M.count.reactions = length(model.Reactions);
 % modified by Yicong
+M.info.model = 'FNR';
 M.info.species = 4;
 M.info.reactions = 4;
 M.info.volume = 0.6E-15;    % the volume of E.ocli in L
 M.info.NA = 6.023E23;       % the Avogadro's constant
+M.info.oxygen = 0;
 
 %% Parameters
 a1      = 0.0871;

@@ -32,6 +32,7 @@ function M = initialize()
 % M.count.species = length(model.Species);
 % M.count.reactions = length(model.Reactions);
 % modified by Yicong
+M.info.model = 'Decoy';
 M.info.species = 8;
 M.info.reactions = 2;
 M.info.volume = 0.6E-15;    % the volume of E.ocli in L
@@ -100,16 +101,16 @@ d('Reaction 1:');
 M.reactions(1).equation = 'T + N <-> TN';
 M.reactions(1).reactant = [2 3];
 M.reactions(1).product = 4;
-M.reactions(1).mesorate_plus = 0.0100;
-M.reactions(1).mesorate_min = 0.4200;
+M.reactions(1).mesorate_plus = @(~,~,~,~)(0.0100);
+M.reactions(1).mesorate_min = @(~,~,~,~)(0.4200);
 d(M.reactions(1).equation);
 
 d('Reaction 2:');
 M.reactions(2).equation = 'T + P <-> TP';
 M.reactions(2).reactant = [2 6];
 M.reactions(2).product = 7;
-M.reactions(2).mesorate_plus = 0.0100;
-M.reactions(2).mesorate_min = 0.4200;
+M.reactions(2).mesorate_plus = @(~,~,~,~)(0.0100);
+M.reactions(2).mesorate_min = @(~,~,~,~)(0.4200);
 d(M.reactions(2).equation);
 
 end

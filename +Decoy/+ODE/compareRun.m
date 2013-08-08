@@ -5,15 +5,15 @@ clear all
 close all
 
 %% Run with the extracted ODEs
-M = Decoy.initialize('data/msb20127-s3.xml');
+M = Decoy.ODE.initialize();
 tspan = [0 10];
-x0 =  Master.nr2mol(M,M.amounts);
-[t,x] = ode45(@(t,x)Decoy.ode(t,x,M),tspan,x0);
+x0 = M.amounts;
+[t,x] = ode45(@(t,x)Decoy.ODE.ode(t,x,M),tspan,x0);
 plot(t,x)
 title('extracted ODE')
 
 %% Run with the SimBiology toolbox
-sbioM = sbmlimport('data/msb20127-s3.xml');
+sbioM = sbmlimport('data/msb20127-s2.xml');
 [T,X,NAMES] = sbiosimulate(sbioM);
 figure;
 plot(T,X)

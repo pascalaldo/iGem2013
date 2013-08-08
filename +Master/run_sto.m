@@ -2,7 +2,15 @@
 
 clear i M t a leg;
 
-M = Decoy.initialize('data/msb20127-s3.xml');
+disp('1) Decoy model');
+disp('2) FNR model');
+model = input('Please choose: ');
+
+if model == 1
+    M = Decoy.Stochastic.initialize();
+else
+    M = FNR.Stochastic.initialize();
+end
 
 % Create a legend
 leg = cell(M.info.species,1);
@@ -12,7 +20,7 @@ end
 
 tmax=10;
 
-[t,a] = Decoy.simulate(M,tmax);
+[t,a] = Tools.simulate(M,tmax);
 figure(1);
 plot(t,a);
 legend(leg);
@@ -21,7 +29,7 @@ xlabel('Time (s)');
 ylabel('Amount (molecules)');
 clear t a;
 
-[t,a] = Decoy.evaluate(M,100,tmax);
+[t,a] = Tools.evaluate(M,100,tmax);
 
 figure(2);
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
