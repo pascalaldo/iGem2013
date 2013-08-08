@@ -13,15 +13,9 @@ x0(3) = FNRdata.values(FNRdata.toID('activeFNR'));%(uM) [mRNA inactiveFNR active
 oxygen = @(t)(0);
 
 % Integrate ODEs:
-<<<<<<< HEAD:+FNR/run.m
 tspan = [0 900]; %(min)
 d(sprintf('Simulated time: %d minutes', tspan(2)));
 [t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t),FNRdata),tspan,x0); %Runge-Kutta
-=======
-tspan = [0 10]; %(min)
-d(sprintf('Simulated time: %d seconds', tspan(2)));
-[t,x] = ode45(@(t,x)FNR.ode(t,x,oxygen(t)),tspan,x0); %Runge-Kutta
->>>>>>> master:+FNR/run_ode.m
 
 % Plot results:
 figure; plot(t,x);
