@@ -6,7 +6,7 @@ close all
 
 %% Run with the extracted ODEs
 M = Decoy.ODE.initialize();
-tspan = [0 10];
+tspan = [0 0.16];
 x0 = M.amounts;
 [t,x] = ode45(@(t,x)Decoy.ODE.ode(t,x,M),tspan,x0);
 plot(t,x)
