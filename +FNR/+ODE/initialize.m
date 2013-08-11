@@ -1,10 +1,17 @@
 function M = initialize()
-% initialize.m geneFNRdatas the FNRdata in the workspace.
-% oxygen is not included in the struct
+% M = FNR.ODE.INITIALIZE() generates the ODE data needed in the FNR model.
 % concentrations in [uM]
-% FNRdatas in [uM/min]
-% a - aerobic
-% n - anaerobic
+% rates in [uM/min]
+% a short for aerobic
+% n short for anaerobic
+% The output struct M looks like this:
+% M
+%   .info
+%       .model                  - FNR
+%   .toID(name)                 - Convert species name to a species ID
+%   .values(id)                 - Values used in the ode functions
+%   .oxygen                     - The concentrations of oxygen
+%   .amounts(nr)                - Initial concentrations
 
 M.info.model = 'FNR';
 

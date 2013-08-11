@@ -8,9 +8,12 @@ function M = initialize()
 %
 % M
 %  .info
+%        .model                  - The type of the model
 %        .volume                 - The volume of E.coli
 %        .species                - The number of species in the model
 %        .reactions              - The number of reactions in the model
+%        .NA                     - The Avgadro's constant
+%        .copyNumber             - The copy number of plasmid
 %  .species
 %          .toName(id)           - Convert species ID to a species name
 %          .toID(name)           - Convert species name to a species ID
@@ -29,9 +32,6 @@ function M = initialize()
 % Yicong Chen <y.chen.3@student.tue.nl>
 % Pasal Pieters <p.a.pieters@student.tue.nl>
 
-% M.count.species = length(model.Species);
-% M.count.reactions = length(model.Reactions);
-% modified by Yicong
 M.info.model = 'Decoy';
 M.info.species = 8;
 M.info.reactions = 2;
@@ -83,7 +83,7 @@ M.species.toId('P0') = 8;
 d('- Added species `P0`');
 
 
-% Set up the stoichiometry matrix
+%% Set up the stoichiometry
 M.stoichiometry = sparse(zeros(M.info.species,M.info.reactions));
 M.stoichiometry(2,1) = -1;
 M.stoichiometry(3,1) = -1;
@@ -92,11 +92,11 @@ M.stoichiometry(2,2) = -1;
 M.stoichiometry(6,2) = -1;
 M.stoichiometry(7,2) = 1;
 
-% Set the initial condition
+%% Set the amounts (initial condition)
 M.amounts = round([500; 500; 100; 0; 100; 7; 0; 7].*M.info.copyNumber);
 
 %% Reactions
-%
+
 d('------ Reactions ------');
 d('Reaction 1:');
 M.reactions(1).equation = 'T + N <-> TN';
