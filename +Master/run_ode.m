@@ -4,20 +4,21 @@ clear x0 tspan;
 
 disp('1) Decoy model');
 disp('2) FNR model');
+disp('3) Master model');
 model = input('Please choose: ');
 
 if model == 1
     M = Decoy.ODE.initialize();
     ode = @Decoy.ODE.ode;
-else
+elseif model == 2
     M = FNR.ODE.initialize();
     ode = @FNR.ODE.ode;
+else
+    M = Merged.ODE.initialize();
+    ode = @Merged.ODE.ode;
 end
 
 x0 = M.amounts;
-%d('Initial concentrations in uM');
-%d(sprintf('O2: %d', x0(3)));
-%d(sprintf('FNR: %d', x0(1)));
 
 % Integrate ODEs:
 tspan = [0 900]; %(min)
@@ -30,14 +31,18 @@ legend('mRNA', 'Inactive FNR','Active FNR');
 xlabel('time (min)');
 ylabel('concentration (µM)');
 
-clear t x
+% clear t x
 
-if model == 2
+if model ~= 1
     tic;
     O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
     xs = [];
     for i=O2
-        M.oxygen = i;
+        if model == 2
+            M.oxygen = i;
+        else
+            M.FNR.oxygen = i;
+        end
         xs = [xs; Tools.steadystate(15, M)];
     end
     toc

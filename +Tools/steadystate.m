@@ -2,12 +2,14 @@ function steady = steadystate(tmax, M)
 %STEADYSTATE Summary of this function goes here
 %   Detailed explanation goes here
 
-x0 = M.amounts; %(uM) [mRNA inactiveFNR activeFNR]
+x0 = M.amounts; % [uM]
 
 if strcmp(M.info.model, 'FNR')
     ode = @FNR.ODE.ode;
-else
+elseif strcmp(M.info.model, 'Decoy')
     ode = @Decoy.ODE.ode;
+else
+    ode = @Merged.ODE.ode;
 end
 
 % Integrate ODEs:

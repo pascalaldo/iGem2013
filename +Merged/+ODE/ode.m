@@ -1,4 +1,4 @@
-function f = ode(t,x,D,F)
+function f = ode(t,x,M)
 % F = MERGED.ODE.ODE(T,X,D,F) combines the ODEs of decoy model and FNR model.
 % D can be generated using Decoy.ODE.initialize()
 % F can be generated using FNR.ODE.intialize()
@@ -15,10 +15,10 @@ function f = ode(t,x,D,F)
 % 10- inactive FNR
 
 % decoy model
-a = Decoy.ODE.ode(t,x(1:8),D);
+a = Decoy.ODE.ode(t,x(1:8),M.Decoy);
 
 % FNR model
-b = FNR.ODE.ode(t,x([9 10 1]),F);
+b = FNR.ODE.ode(t,x([9 10 1]),M.FNR);
 
 % Calculate the change ratio of total active FNR
 f(1) = b(3);
