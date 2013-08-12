@@ -1,6 +1,0 @@
-D = Decoy.ODE.initialize();
-F = FNR.ODE.initialize();
-
-t = [0,10];
-x0 = D.amounts;
-x0(1)= 
