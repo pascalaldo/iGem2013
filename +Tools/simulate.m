@@ -7,7 +7,7 @@ function [t,a] = simulate(M,tmax)
 i = 1;
 t(i) = 0;
 
-FNRModel = strcmp(M.info.model, 'FNR');
+FNRModel = ~strcmp(M.info.model, 'Decoy');
 x1 = 0; x3 = 0; x6 = 0; env = 0;
 
 while t(i) < tmax

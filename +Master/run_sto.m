@@ -4,12 +4,15 @@ clear i M t a leg;
 
 disp('1) Decoy model');
 disp('2) FNR model');
+disp('3) Merged model');
 model = input('Please choose: ');
 
 if model == 1
     M = Decoy.Stochastic.initialize();
-else
+elseif model == 2
     M = FNR.Stochastic.initialize();
+else
+    M = Merged.Stochastic.initialize();
 end
 
 % Create a legend

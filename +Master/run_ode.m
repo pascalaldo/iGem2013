@@ -4,7 +4,7 @@ clear x0 tspan;
 
 disp('1) Decoy model');
 disp('2) FNR model');
-disp('3) Master model');
+disp('3) Merged model');
 model = input('Please choose: ');
 
 if model == 1

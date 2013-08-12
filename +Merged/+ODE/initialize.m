@@ -17,7 +17,7 @@ function M = initialize()
 D = Decoy.ODE.initialize();
 F = FNR.ODE.initialize();
 
-M.info.model = 'Master';
+M.info.model = 'Merged';
 M.info.species = 10;
 
 d('------ Species ------');
