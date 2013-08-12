@@ -51,35 +51,35 @@ M.species.toName = containers.Map('KeyType','uint32','ValueType','char');
 M.species.toID = containers.Map('KeyType','char','ValueType','uint32');
 
 M.species.toName(1) = 'T0';
-M.species.toId('T0') = 1;
+M.species.toID('T0') = 1;
 d('- Added species `T0`');
 
 M.species.toName(2) = 'T';
-M.species.toId('T') = 2;
+M.species.toID('T') = 2;
 d('- Added species `T`');
 
 M.species.toName(3) = 'N';
-M.species.toId('N') = 3;
+M.species.toID('N') = 3;
 d('- Added species `N`');
 
 M.species.toName(4) = 'TN';
-M.species.toId('TN') = 4;
+M.species.toID('TN') = 4;
 d('- Added species `TN`');
 
 M.species.toName(5) = 'N0';
-M.species.toId('N0') = 5;
+M.species.toID('N0') = 5;
 d('- Added species `N0`');
 
 M.species.toName(6) = 'P';
-M.species.toId('P') = 6;
+M.species.toID('P') = 6;
 d('- Added species `P`');
 
 M.species.toName(7) = 'TP';
-M.species.toId('TP') = 7;
+M.species.toID('TP') = 7;
 d('- Added species `TP`');
 
 M.species.toName(8) = 'P0';
-M.species.toId('P0') = 8;
+M.species.toID('P0') = 8;
 d('- Added species `P0`');
 
 

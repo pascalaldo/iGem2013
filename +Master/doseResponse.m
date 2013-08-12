@@ -1,11 +1,20 @@
-function err = doseResponse()
-% ERR = MASTER.DOSERESPONSE() calculates and plots the dose response of O2
-% or FNR on promoter occupancy.
-% Detailed info to be continued
+clear all
+close all
 
-M = FNR.ODE.initialize();
-tspan = [0 10];
+D = Decoy.ODE.initialize();
+F = FNR.ODE.initialize();
 
-[t,x] = ode45(@(t,x)Decoy.ODE.ode(t,x,M),tspan,x0);
+tspan = [0,10];
+x0 = D.amounts;
+x0(1) = F.amounts(3);
+x0(9) = F.amounts(1);
+x0(10) = F.amounts(2);
 
-end
+% full ode
+[t,x] = ode45(@(t,x)Merged.ODE.ode(t,x,D,F),tspan,x0);
+plot(t,x)
+
+% FNR ode
+[s,y] = ode45(@(t,x)FNR.ODE.ode(t,x,F),tspan,F.amounts);
+figure
+plot(s,y)
