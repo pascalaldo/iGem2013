@@ -21,7 +21,7 @@ end
 x0 = M.amounts;
 
 % Integrate ODEs:
-tspan = [0 900]; %(min)
+tspan = [0 15]; %(min)
 d(sprintf('Simulated time: %d minutes', tspan(2)));
 [t,x] = ode45(@(t,x)ode(t,x,M),tspan,x0); %Runge-Kutta
 
