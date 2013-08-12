@@ -34,5 +34,5 @@ Thumbs.db
 
 # Matlab backup files #
 #######################
-*.sav
+*.asv
 *~
