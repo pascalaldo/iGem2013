@@ -18,6 +18,18 @@ D = Decoy.ODE.initialize();
 F = FNR.ODE.initialize();
 
 M.info.model = 'Master';
+M.info.species = 10;
+
+d('------ Species ------');
+M.species = D.species;
+
+M.species.toName(9) = 'FNR mRNA';
+M.species.toId('FNR-mRNA') = 9;
+d('- Added species `FNR-mRNA`');
+
+M.species.toName(10) = 'Inactive FNR';
+M.species.toId('Inactive FNR') = 10;
+d('- Added species `Inactive FNR`');
 
 M.Decoy = D;
 M.FNR = F;

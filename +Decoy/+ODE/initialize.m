@@ -29,6 +29,7 @@ M = Decoy.Stochastic.initialize();
 O.info.model = 'Decoy';
 O.info.species = M.info.species;
 O.info.reactions = M.info.reactions;
+O.species = M.species;
 
 for i = 1:M.info.reactions
     [megaRatePlus,megaRateMin] = Tools.meso2mega(M, i);

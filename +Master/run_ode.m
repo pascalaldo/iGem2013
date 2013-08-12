@@ -27,7 +27,11 @@ d(sprintf('Simulated time: %d minutes', tspan(2)));
 
 % Plot results:
 figure; plot(t,x);
-legend('mRNA', 'Inactive FNR','Active FNR');
+leg = {};
+for i=1:M.info.species
+    leg = {leg{:}, M.species.toName(i)};
+end
+legend(leg);
 xlabel('time (min)');
 ylabel('concentration (µM)');
 
@@ -47,7 +51,7 @@ if model ~= 1
     end
     toc
     figure; loglog(O2',xs);
-    legend('mRNA', 'Inactive FNR','Active FNR');
+    legend(leg);
     xlabel('oxygen concentration (µM)');
     ylabel('concentration (µM)');
 
