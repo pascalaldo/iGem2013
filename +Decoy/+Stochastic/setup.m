@@ -76,7 +76,6 @@ d('- Added species `P0`');
 
 
 %% Set up the stoichiometry
-M.stoichiometry = sparse(zeros(M.info.species,M.info.reactions));
 M.stoichiometry(M.species.T,M.reaction.TpN_TN) = -1;
 M.stoichiometry(M.species.N,M.reaction.TpN_TN) = -1;
 M.stoichiometry(M.species.TN,M.reaction.TpN_TN) = 1;

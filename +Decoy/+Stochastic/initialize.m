@@ -24,6 +24,7 @@ S.species.TP    = 7;
 S.species.P0    = 8;
 
 %% Reactions
+S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
 S.reaction.TpN_TN  = 1;
 S.reaction.TpP_TP  = 2;

@@ -46,6 +46,7 @@ S.species.TP            = 10;
 S.species.P0            = 11;
 
 %% Reactions
+S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
 S.reaction.Void_FNRmRNA         = 1;
 S.reaction.Void_InactiveFNR     = 2;

@@ -37,6 +37,7 @@ S.species.InactiveFNR   = 3;
 S.species.ActiveFNR     = 4;
 
 %% Reactions
+S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
 S.reaction.Void_FNRmRNA         = 1;
 S.reaction.Void_InactiveFNR     = 2;

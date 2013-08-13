@@ -39,23 +39,22 @@ M = S;
 % calculating the mesoscopic rate.
 d('------ Species ------');
 M.species.toName(M.species.Void) = 'Void';
-M.species.toId('Void') = M.species.Void;
+M.species.toID('Void') = M.species.Void;
 d('- Added species `Void`');
 
 M.species.toName(M.species.FNRmRNA) = 'FNR mRNA';
-M.species.toId('FNR-mRNA') = M.species.FNRmRNA;
+M.species.toID('FNR-mRNA') = M.species.FNRmRNA;
 d('- Added species `FNR-mRNA`');
 
 M.species.toName(M.species.InactiveFNR) = 'Inactive FNR';
-M.species.toId('Inactive FNR') = M.species.InactiveFNR;
+M.species.toID('Inactive FNR') = M.species.InactiveFNR;
 d('- Added species `Inactive FNR`');
 
 M.species.toName(M.species.ActiveFNR) = 'Active FNR';
-M.species.toId('Active FNR') = M.species.ActiveFNR;
+M.species.toID('Active FNR') = M.species.ActiveFNR;
 d('- Added species `Active FNR`');
 
 % Set up the stoichiometry matrix
-M.stoichiometry = sparse(zeros(M.info.species,M.info.reactions));
 M.stoichiometry(M.species.FNRmRNA,M.reaction.Void_FNRmRNA) = 1;
 M.stoichiometry(M.species.InactiveFNR,M.reaction.Void_InactiveFNR) = 1;
 M.stoichiometry(M.species.ActiveFNR,M.reaction.Void_ActiveFNR) = 1;
@@ -77,14 +76,14 @@ d(sprintf('Reaction %d:',M.reaction.Void_FNRmRNA));
 M.reactions(M.reaction.Void_FNRmRNA).equation = 'Void <-> FNR mRNA';
 M.reactions(M.reaction.Void_FNRmRNA).reactant = M.species.Void;
 M.reactions(M.reaction.Void_FNRmRNA).product = M.species.FNRmRNA;
-    function r = reaction1_mesorate_plus(env,x1,x3,x6)
-        if x3<M.par.x3c*NV
-            r = M.par.a1max*NV;
-        else
-            r = M.par.a1*NV*(x3/NV)^M.par.g13;
-        end
-    end
-M.reactions(M.reaction.Void_FNRmRNA).mesorate_plus = @reaction1_mesorate_plus;
+%     function r = reaction1_mesorate_plus(env,x1,x3,x6)
+%         if x3<M.par.x3c*NV
+%             r = M.par.a1max*NV;
+%         else
+%             r = M.par.a1*NV*(x3/NV)^M.par.g13;
+%         end
+%     end
+M.reactions(M.reaction.Void_FNRmRNA).mesorate_plus = @(env,x1,x3,x6)(((x3<M.par.x3c*NV) * M.par.a1max*NV) + ((~(x3<M.par.x3c*NV)) * M.par.a1*NV*(x3/NV)^M.par.g13));%@reaction1_mesorate_plus;
 M.reactions(M.reaction.Void_FNRmRNA).mesorate_min = @(env,x1,x3,x6)( M.par.b1(env) );
 d(M.reactions(M.reaction.Void_FNRmRNA).equation);
 
@@ -106,7 +105,7 @@ d(M.reactions(M.reaction.Void_ActiveFNR).equation);
 
 d(sprintf('Reaction %d:',M.reaction.InactiveFNR_ActiveFNR));
 M.reactions(M.reaction.InactiveFNR_ActiveFNR).equation = '2 Inactive FNR <-> Active FNR';
-M.reactions(M.reaction.InactiveFNR_ActiveFNR).reactant = M.species.InactiveFNR;
+M.reactions(M.reaction.InactiveFNR_ActiveFNR).reactant = [M.species.InactiveFNR M.species.InactiveFNR];
 M.reactions(M.reaction.InactiveFNR_ActiveFNR).product = M.species.ActiveFNR;
 M.reactions(M.reaction.InactiveFNR_ActiveFNR).mesorate_plus = @(env,x1,x3,x6)( M.par.b22*M.par.x5/NV );
 M.reactions(M.reaction.InactiveFNR_ActiveFNR).mesorate_min = @(env,x1,x3,x6)( M.par.a22*x6 );

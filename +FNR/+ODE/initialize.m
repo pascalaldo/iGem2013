@@ -21,15 +21,15 @@ M.species.toName = containers.Map('KeyType','uint32','ValueType','char');
 M.species.toID = containers.Map('KeyType','char','ValueType','uint32');
 
 M.species.toName(1) = 'FNR mRNA';
-M.species.toId('FNR-mRNA') = 1;
+M.species.toID('FNR mRNA') = 1;
 d('- Added species `FNR-mRNA`');
 
 M.species.toName(2) = 'Inactive FNR';
-M.species.toId('Inactive FNR') = 2;
+M.species.toID('Inactive FNR') = 2;
 d('- Added species `Inactive FNR`');
 
 M.species.toName(3) = 'Active FNR';
-M.species.toId('Active FNR') = 3;
+M.species.toID('Active FNR') = 3;
 d('- Added species `Active FNR`');
 
 M.toID = containers.Map('KeyType','char','ValueType','uint32');

@@ -37,23 +37,23 @@ ylabel('concentration (µM)');
 
 % clear t x
 
-if model ~= 1
-    tic;
-    O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
-    xs = [];
-    for i=O2
-        if model == 2
-            M.oxygen = i;
-        else
-            M.FNR.oxygen = i;
-        end
-        xs = [xs; Tools.steadystate(15, M)];
-    end
-    toc
-    figure; loglog(O2',xs);
-    legend(leg);
-    xlabel('oxygen concentration (µM)');
-    ylabel('concentration (µM)');
-
-    clear x0 tspan;
-end
+% if model ~= 1
+%     tic;
+%     O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
+%     xs = [];
+%     for i=O2
+%         if model == 2
+%             M.oxygen = i;
+%         else
+%             M.FNR.oxygen = i;
+%         end
+%         xs = [xs; Tools.steadystate(15, M)];
+%     end
+%     toc
+%     figure; loglog(O2',xs);
+%     legend(leg);
+%     xlabel('oxygen concentration (µM)');
+%     ylabel('concentration (µM)');
+% 
+%     clear x0 tspan;
+% end
