@@ -1,78 +1,62 @@
 function M = initialize()
-% [D,F,M] = MERGED.ODE.INITIALIZE() generates the data for master ode model
-% M
-%   .info
-%       .model                              - 'master'
-%   .Decoy                                  - Decoy struct
-%   .FNR                                    - FNR struct
-%   .amounts(id)                            - initial concentrations
-%   .oxygen                                 - oxygen concentrations
+% FNR.STOCHASTIC.INITIALIZE
 
-D = Decoy.Stochastic.initialize();
-F = FNR.Stochastic.initialize();
+S.info.model = 'Merged';
+S.info.species = 11;
+S.info.reactions = 8;
+S.info.volume = 0.6E-15;    % the volume of E.ocli in L
+S.info.NA = 6.023E23;       % the Avogadro's constant
+S.info.oxygen = 0;
+S.info.copyNumber = 17.5;
 
-M.info.model = 'Merged';
-M.info.species = 11;
-M.info.reactions = 8;
-M.info.volume = 0.6E-15;    % the volume of E.ocli in L
-M.info.NA = 6.023E23;       % the Avogadro's constant
-M.info.oxygen = 0;
+%% Parameters
+S.par.a1      = 0.0871;
+S.par.a1max   = 0.135;
+S.par.a21     = 0.484;
+S.par.a22     = 4.09;
+S.par.b22     = 2.6;
+S.par.b1(1)   = 0.838;
+S.par.b1(2)   = 0.613;
+S.par.b21(1)  = 0.0821;
+S.par.b21(2)  = 0.0634;
+S.par.b31(1)  = 0.0231;
+S.par.b31(2)  = 0.0148;
+S.par.g13     = -0.464;
+S.par.x4      = 0.196;
+S.par.x5      = 0.455;
+%S.par.x6      = oxygen;
+S.par.x3c     = 0.389;
 
-b31(1)  = 0.0231;
-b31(2)  = 0.0148;
+%% Species
+S.species.toName = containers.Map('KeyType','uint32','ValueType','char');
+S.species.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-d('------ Species ------');
-M.species = F.species;
+S.species.Void          = 1;
+S.species.FNRmRNA       = 2;
+S.species.InactiveFNR   = 3;
+S.species.ActiveFNR     = 4;
+S.species.T0            = 5;
+S.species.T             = 4;
+S.species.N             = 6;
+S.species.TN            = 7;
+S.species.N0            = 8;
+S.species.P             = 9;
+S.species.TP            = 10;
+S.species.P0            = 11;
 
-M.species.toName(F.info.species+1) = D.species.toName(1);
-M.species.toID(D.species.toName(1)) = F.info.species+1;
-d(sprintf('- Added species `%s`', M.species.toName(F.info.species+1)));
-for i=[3:D.info.species]
-    M.species.toName(F.info.species+i-1) = D.species.toName(i);
-    M.species.toID(D.species.toName(i)) = F.info.species+i-1;
-    d(sprintf('- Added species `%s`', M.species.toName(F.info.species+i-1)));
-end
+%% Reactions
 
-M.Decoy = D;
-M.FNR = F;
+S.reaction.Void_FNRmRNA         = 1;
+S.reaction.Void_InactiveFNR     = 2;
+S.reaction.Void_ActiveFNR       = 3;
+S.reaction.InactiveFNR_ActiveFNR= 4;
+S.reaction.TpN_TN               = 5;
+S.reaction.TpP_TP               = 6;
+S.reaction.VoidpN_TN            = 7;
+S.reaction.VoidpP_TP            = 8;
 
-stF = [M.FNR.stoichiometry sparse(zeros(M.FNR.info.species,M.Decoy.info.reactions))];
-stD = [sparse(zeros(M.Decoy.info.species,M.FNR.info.reactions)) M.Decoy.stoichiometry];
-
-degrTN = sparse(zeros(M.info.species,1));
-degrTN(6) = -1;
-degrTN(7) = 1;
-degrTP = sparse(zeros(M.info.species,1));
-degrTP(9) = -1;
-degrTP(10) = 1;
-
-M.stoichiometry = [[stF(1:3,:); (stF(4,:) + stD(2,:)); stD([1 3:D.info.species],:)] degrTN degrTP];
-d(full(M.stoichiometry));
-
-M.reactions = F.reactions;
-for i=[1:D.info.reactions]
-    M.reactions(F.info.reactions+i) = D.reactions(i);
-    M.reactions(F.info.reactions+i).reactant = M.reactions(F.info.reactions+i).reactant + F.info.species-1;
-    M.reactions(F.info.reactions+i).product = M.reactions(F.info.reactions+i).product + F.info.species-1;
-    d(M.reactions(F.info.reactions+i).equation);
-end
-
-M.reactions(7).equation = 'Void + N <- TN';
-M.reactions(7).reactant = [1 6];
-M.reactions(7).product = 7;
-M.reactions(7).mesorate_plus = @(env,x1,x3,x6)( 0 );
-M.reactions(7).mesorate_min = @(env,x1,x3,x6)( b31(env) );
-d(M.reactions(7).equation);
-
-M.reactions(8).equation = 'Void + P <- TP';
-M.reactions(8).reactant = [1 9];
-M.reactions(8).product = 10;
-M.reactions(8).mesorate_plus = @(env,x1,x3,x6)( 0 );
-M.reactions(8).mesorate_min = @(env,x1,x3,x6)( b31(env) );
-d(M.reactions(8).equation);
-
-M.amounts = F.amounts;
-M.amounts(5) = D.amounts(1);
-M.amounts(6:11) = D.amounts(3:8);
+M = Decoy.Stochastic.setup(S);
+M = FNR.Stochastic.setup(M);
+M = Merged.Stochastic.setup(M);
 
 end
