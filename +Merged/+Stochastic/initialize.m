@@ -4,6 +4,7 @@ function M = initialize()
 S.info.model = 'Merged';
 S.info.species = 11;
 S.info.reactions = 8;
+S.info.rules = 3;
 S.info.volume = 0.6E-15;    % the volume of E.ocli in L
 S.info.NA = 6.023E23;       % the Avogadro's constant
 S.info.oxygen = 0;
@@ -54,6 +55,11 @@ S.reaction.TpN_TN               = 5;
 S.reaction.TpP_TP               = 6;
 S.reaction.VoidpN_TN            = 7;
 S.reaction.VoidpP_TP            = 8;
+
+%% Rules
+S.rule.T0 = 1;
+S.rule.N0 = 2;
+S.rule.P0 = 3;
 
 M = Decoy.Stochastic.setup(S);
 M = FNR.Stochastic.setup(M);

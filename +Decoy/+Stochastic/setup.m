@@ -113,4 +113,11 @@ M.reactions(M.reaction.TpP_TP).mesorate_plus = @(~,~,~,~)(0.0100);
 M.reactions(M.reaction.TpP_TP).mesorate_min = @(~,~,~,~)(0.4200);
 d(M.reactions(M.reaction.TpP_TP).equation);
 
+%% Rules
+
+d('------ Rules ------');
+M.rules(M.rule.T0).expression = 'M.amounts(M.species.T0,i) = M.amounts(M.species.T,i) + M.amounts(M.species.TN,i) + M.amounts(M.species.TP,i);';
+M.rules(M.rule.N0).expression = 'M.amounts(M.species.N0,i) = M.amounts(M.species.N,i) + M.amounts(M.species.TN,i);';
+M.rules(M.rule.P0).expression = 'M.amounts(M.species.P0,i) = M.amounts(M.species.P,i) + M.amounts(M.species.TP,i);';
+
 end

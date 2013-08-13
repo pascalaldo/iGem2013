@@ -4,6 +4,7 @@ function M = initialize()
 S.info.model = 'FNR';
 S.info.species = 4;
 S.info.reactions = 4;
+S.info.rules = 0;
 S.info.volume = 0.6E-15;    % the volume of E.ocli in L
 S.info.NA = 6.023E23;       % the Avogadro's constant
 S.info.oxygen = 0;

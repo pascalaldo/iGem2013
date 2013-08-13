@@ -5,6 +5,7 @@ function M = initialize()
 S.info.model = 'Decoy';
 S.info.species = 8;
 S.info.reactions = 2;
+S.info.rules = 3;
 S.info.volume = 0.6E-15;    % the volume of E.ocli in L
 S.info.NA = 6.023E23;       % the Avogadro's constant
 S.info.copyNumber = 17.5;
@@ -26,6 +27,11 @@ S.species.P0    = 8;
 
 S.reaction.TpN_TN  = 1;
 S.reaction.TpP_TP  = 2;
+
+%% Rules
+S.rule.T0 = 1;
+S.rule.N0 = 2;
+S.rule.P0 = 3;
 
 M = Decoy.Stochastic.setup(S);
 

@@ -7,6 +7,10 @@ function [t,a] = simulate(M,tmax)
 i = 1;
 t(i) = 0;
 
+for j = 1:M.info.rules
+    eval(M.rules(j).expression);
+end
+
 FNRModel = ~strcmp(M.info.model, 'Decoy');
 x1 = 0; x3 = 0; x6 = 0; env = 0;
 
@@ -41,6 +45,10 @@ while t(i) < tmax
         M.amounts(:,i) = M.amounts(:,i-1) + M.stoichiometry(:,flag);
     else % Reverse reaction
         M.amounts(:,i) = M.amounts(:,i-1) - M.stoichiometry(:,flag-M.info.reactions);
+    end
+    
+    for j = 1:M.info.rules
+        eval(M.rules(j).expression);
     end
     %figure(1);
     %plot(t,M.amounts(2:4,:));
