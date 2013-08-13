@@ -30,8 +30,10 @@ O.info.model = 'Decoy';
 O.info.species = M.info.species;
 O.info.reactions = M.info.reactions;
 O.species = M.species;
+O.reaction = M.reaction;
 
 for i = 1:M.info.reactions
+    d(sprintf('Reaction %d: %s',i,M.reactions(i).equation))
     [megaRatePlus,megaRateMin] = Tools.meso2mega(M, i);
     O.rates(i).megaRatePlus = megaRatePlus;
     O.rates(i).megaRateMin = megaRateMin;
