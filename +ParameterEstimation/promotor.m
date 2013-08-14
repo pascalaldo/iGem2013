@@ -10,8 +10,8 @@ M.amounts(M.species.N,:) = 0;
 M.amounts(M.species.TN,:) = 0;
 M.amounts(M.species.N0,:) = 0;
 M.amounts(M.species.TP,:) = 0;
-M.amounts(M.species.P,:) = 0.005; % 5 nm 48bp concensus sites
-M.amounts(M.species.P0,:) = 0.005; % 5 nm 48bp concensus sites
+M.amounts(M.species.P,:) = 0.005; % 5 nM 48bp concensus sites
+M.amounts(M.species.P0,:) = 0.005; % 5 nM 48bp concensus sites
 
 M.oxygen = 0;
 M.info.oxygen = 0;
