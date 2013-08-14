@@ -32,7 +32,7 @@ xlabel('Time (s)');
 ylabel('Amount (molecules)');
 clear t a;
 
-[t,a] = Tools.evaluate(M,100,tmax);
+[t,a] = Tools.evaluate(M,10,tmax);
 
 figure(2);
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);

@@ -44,7 +44,7 @@ problem = createOptimProblem('lsqcurvefit','objective', ...
 @(par,xdata)(modelfunc(par,xdata,M)),'x0',par0,'lb',parlb,'ub',parub, ...
 'xdata',xdata,'ydata',ydata);
 ms = MultiStart;%('PlotFcns',@gsplotbestf);
-[parms,errormulti] = run(ms,problem,30);
+[parms,errormulti] = run(ms,problem,15);
 
 %gs = GlobalSearch;%('PlotFcns',@gsplotbestf);
 %[pargs,errorglobal] = run(gs,problem);
