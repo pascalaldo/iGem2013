@@ -15,26 +15,25 @@ function f = ode(t,x,M)
 % 10- inactive FNR
 
 % decoy model
-a = Decoy.ODE.ode(t,x(1:8),M.Decoy);
+f1 = Decoy.ODE.ode(t,x,M);
+f2 = FNR.ODE.ode(t,x,M);
+
+f = f1+f2;
 
 % FNR model
-b = FNR.ODE.ode(t,x([9 10 2]),M.FNR);
-b31(1)  = M.FNR.values(13);
-b31(2)  = M.FNR.values(14);
-env = (M.oxygen<10)+1;
+b31(1)  = M.values(M.parameters.b31a);
+b31(2)  = M.values(M.parameters.b31n);
+env = (M.values(M.parameters.oxygen)<10)+1;
 
-f(1) = b(3) - b31(env)*x(1);                % T0, total T
-f(3) = a(3) + b31(env)*x(4);                % N, unbound decoy sites
-f(5) = a(5);                % N0, total decoy sites
-f(6) = a(6) + b31(env)*x(7);                % P, unbound promoter sites
-f(8) = a(8);                % P0, total promoter sites
-f(9) = b(1);                % FNR mRNA
-f(10) = b(2);               % inactive FNR
+f(M.species.N) = f(M.species.N) + b31(env)*x(M.species.TN);
+f(M.species.P) = f(M.species.P) + b31(env)*x(M.species.TP);
 
+f(M.species.TN) = f(M.species.TN) - b31(env)*x(M.species.TN);
+f(M.species.TP) = f(M.species.TP) - b31(env)*x(M.species.TP);
 
-f(2) = b(3) + a(2);            % T, free and active FNR
-f(4) = a(4) - b31(env)*x(4);            % TN, bound decoy sites
-f(7) = a(7) - b31(env)*x(7);            % TP, bound promoter sites
+f(M.species.T0) = f(M.species.T)+f(M.species.TN)+f(M.species.TP); % T0, total T
+f(M.species.N0) = f(M.species.N)+f(M.species.TN); % T0, total T
+f(M.species.P0) = f(M.species.P)+f(M.species.TP); % T0, total T
 
 f = f(:);
 

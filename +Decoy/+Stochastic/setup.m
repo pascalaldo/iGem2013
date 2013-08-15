@@ -94,7 +94,6 @@ M.amounts(M.species.TP,:) = round(0*M.info.copyNumber);
 M.amounts(M.species.P0,:) = round(7*M.info.copyNumber);
 
 %% Reactions
-
 d('------ Reactions ------');
 d(sprintf('Reaction %d:',M.reaction.TpN_TN));
 M.reactions(M.reaction.TpN_TN).equation = 'T + N <-> TN';

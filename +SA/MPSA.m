@@ -15,10 +15,10 @@ par0 = double.empty;                        % initialize par0 for origianl value
 repeats = varargin{2};
 dummyNr = varargin{3};
 
-if strcmp(varargin{4},'oxygenOn')
-    par0 = M.oxygen;
-    n_Real = n_Real + 1;
-end
+%if strcmp(varargin{4},'oxygenOn')
+%    par0 = M.oxygen;
+%    n_Real = n_Real + 1;
+%end
 
 if strcmp(varargin{5},'values')||strcmp(varargin{7},'values')
 % determine if the values of varargin{5} and varargin{7} are 'rates'

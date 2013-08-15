@@ -24,7 +24,7 @@ end
 tmax=10;
 
 [t,a] = Tools.simulate(M,tmax);
-figure(1);
+figure;
 plot(t,a);
 legend(leg);
 title('Single Run');
@@ -34,7 +34,7 @@ clear t a;
 
 [t,a] = Tools.evaluate(M,10,tmax);
 
-figure(2);
+figure;
 plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
 legend(leg);
 title('Multiple Runs');

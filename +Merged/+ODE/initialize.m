@@ -14,32 +14,67 @@ function M = initialize()
 %   .amounts(id)                            - initial concentrations
 %   .oxygen                                 - oxygen concentrations
 
-D = Decoy.ODE.initialize();
-F = FNR.ODE.initialize();
+S.info.model = 'Merged';
+S.info.species = 10;
+S.info.reactions = 2;
+S.info.rules = 3;
+S.info.volume = 0.6E-15;    % the volume of E.ocli in L
+S.info.NA = 6.023E23;       % the Avogadro's constant
+S.info.copyNumber = 17.5;
 
-M.info.model = 'Merged';
-M.info.species = 10;
+%% Species
+S.species.toName = containers.Map('KeyType','uint32','ValueType','char');
+S.species.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-d('------ Species ------');
-M.species = D.species;
+S.species.FNRmRNA       = 1;
+S.species.InactiveFNR   = 2;
+S.species.ActiveFNR     = 3;
+S.species.T0            = 4;
+S.species.T             = 3;
+S.species.N             = 5;
+S.species.TN            = 6;
+S.species.N0            = 7;
+S.species.P             = 8;
+S.species.TP            = 9;
+S.species.P0            = 10;
 
-M.species.toName(9) = 'FNR mRNA';
-M.species.toID('FNR mRNA') = 9;
-d('- Added species `FNR-mRNA`');
+%% Reactions
+S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
-M.species.toName(10) = 'Inactive FNR';
-M.species.toID('Inactive FNR') = 10;
-d('- Added species `Inactive FNR`');
+S.reaction.TpN_TN  = 1;
+S.reaction.TpP_TP  = 2;
 
-M.Decoy = D;
-M.FNR = F;
+%% Rules
+S.rule.T0 = 1;
+S.rule.N0 = 2;
+S.rule.P0 = 3;
 
-M.oxygen = 0;
+%% Paramters
+S.parameters.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-M.amounts = D.amounts;
-M.amounts(2) = F.amounts(3);
-M.amounts(9) = F.amounts(1);
-M.amounts(10) = F.amounts(2);
-M.amounts(1) = sum(M.amounts([2 4 7]));
+S.parameters.a1 = 1;
+S.parameters.a1max = 2;
+S.parameters.a21 = 3;
+S.parameters.a22 = 4;
+S.parameters.b22 = 5;
+S.parameters.b1a = 6;
+S.parameters.b1n = 7;
+S.parameters.b21a = 8;
+S.parameters.b21n = 9;
+S.parameters.b31a = 10;
+S.parameters.b31n = 11;
+S.parameters.g13 = 12;
+S.parameters.x4 = 13;
+S.parameters.x5 = 14;
+S.parameters.x3c = 15;
+S.parameters.oxygen = 16;
+S.parameters.Knplus = 17;
+S.parameters.Knmin = 18;
+S.parameters.Kpplus = 19;
+S.parameters.Kpmin = 20;
+S.parameters.copyNumber = 21;
+S.parameters.volume = 22;
+
+M = Merged.ODE.setup(S);
 
 end

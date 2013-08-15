@@ -24,4 +24,9 @@ M.reactions(M.reaction.VoidpP_TP).mesorate_plus = @(env,x1,x3,x6)( 0 );
 M.reactions(M.reaction.VoidpP_TP).mesorate_min = @(env,x1,x3,x6)( M.par.b31(env) );
 d(M.reactions(M.reaction.VoidpP_TP).equation);
 
+i = 1;
+for j = 1:M.info.rules
+    eval(M.rules(j).expression);
+end
+
 end
