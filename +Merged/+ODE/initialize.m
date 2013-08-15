@@ -34,12 +34,12 @@ d('- Added species `Inactive FNR`');
 M.Decoy = D;
 M.FNR = F;
 
+M.oxygen = 0;
+
 M.amounts = D.amounts;
 M.amounts(2) = F.amounts(3);
 M.amounts(9) = F.amounts(1);
 M.amounts(10) = F.amounts(2);
 M.amounts(1) = sum(M.amounts([2 4 7]));
-
-M.oxygen = 0;
 
 end

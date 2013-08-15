@@ -35,11 +35,14 @@ O.reaction = M.reaction;
 for i = 1:M.info.reactions
     d(sprintf('Reaction %d: %s',i,M.reactions(i).equation))
     [megaRatePlus,megaRateMin] = Tools.meso2mega(M, i);
-    O.rates(i).megaRatePlus = megaRatePlus;
-    O.rates(i).megaRateMin = megaRateMin;
+%     O.rates(i).megaRatePlus = megaRatePlus;
+%     O.rates(i).megaRateMin = megaRateMin;
+    O.values(i*2-1) = megaRatePlus;
+    O.values(i*2) = megaRateMin;
 end
 
 O.reactions = M.reactions;
+O.oxygen = 0;
 O.amounts = Tools.nr2mol(M,M.amounts);
 
 end
