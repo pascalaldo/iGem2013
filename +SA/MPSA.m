@@ -1,13 +1,15 @@
 function MPSA( varargin )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-% varargin: model,repeats,dataType,value,dataType,dataID,dataType,dataID
-%           1     2       3        4       5         6     7        8
+% varargin: 
+% model,repeats,outName,dataType,count,dataType,dataID,dataType,dataID
+%   1     2       3        4       5         6     7        8     9
 
 %% load values from varargin or default
 modelType   = varargin{1};
 repeats     = varargin{2};
-i = 4;
+outName       = varargin{3};
+i = 5;
 while i <= nargin
     switch varargin{i-1}
         case 'dummy'
@@ -19,13 +21,13 @@ while i <= nargin
     end
     i = i + 2;
 end
-if ~exist('dummyNr')
+if ~exist('dummyNr','var')
     dummyNr = 0;
 end
-if ~exist('valuesID')
+if ~exist('valuesID','var')
     valuesID = 0;
 end
-if ~exist('amountsID')
+if ~exist('amountsID','var')
     amountsID = 0;
 end
 
@@ -40,7 +42,9 @@ n_Real      = n_Real + length(valuesID);
 par0        = [par0;M.amounts(amountsID)];
 n_Real      = n_Real + length(amountsID);
 n_Total     = n_Real + dummyNr;
+outID       = M.species.toID(outName);
 
+%% perform sensitivity analysis
 scale = lhsdesign(repeats, n_Total);                % random uniform distributed parameter sets (values [0,1])
 scale = scale * 2 - 1;          % rescale to bound (-1, 1)
 scale = 10.^scale;              % rescale to logarithm
@@ -54,10 +58,10 @@ for i = n_Real+1 : n_Total
     parVar(:,i) = scale(:,i);
 end
 
-feature0 = SA.getSAfeature(par0,M,dummyNr,valuesID,amountsID);
+feature0 = SA.getSAfeature(par0,M,outID,valuesID,amountsID);
 for j = 1 : repeats
     parTemp=parVar(j,1:n_Real); 
-    feature = SA.getSAfeature(parTemp,M,dummyNr,valuesID,amountsID);
+    feature = SA.getSAfeature(parTemp,M,outID,valuesID,amountsID);
     V(j) = (feature0-feature).^2;
 end
 
