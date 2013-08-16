@@ -1,45 +1,15 @@
-function feature = getSAfeature( varargin )
+function feature = getSAfeature(parTemp,M,dummyNr,valuesID,amountsID)
 %
-% varargin: parTemp,modelStruct,model,ifOxygen,dataType,dataID,dataType,dataID
 
-parTemp = varargin{1};
 n = 0;                                  % ID counter
 
-M = varargin{2};
+M.values(valuesID)      = parTemp(valuesID + n);
+n                       = n + length(valuesID);
 
-if strcmp(varargin{3},'oxygenOn')
-    M.oxygen = parTemp(1);
-    n = n + 1;
-end
+M.amounts(amountsID)    = parTemp(amountsID + n);
 
-if strcmp(varargin{5},'values')||strcmp(varargin{7},'values')
-% determine if the values of varargin{5} and varargin{7} are 'rates'
-    if strcmp(varargin{5},'values')
-        dataID = varargin{6};
-    else
-        dataID = varargin{8};
-    end
-    M.values(dataID) = parTemp(dataID + n);
-    n = n + length(dataID);
-end
+x = Tools.steadystate(300, M);
 
-if strcmp(varargin{5},'amounts')||strcmp(varargin{7},'amounts')
-% determine if the values of varargin{4} and varargin{6} are 'amounts'
-    if strcmp(varargin{5},'amounts')
-        dataID = varargin{6};
-    else
-        dataID = varargin{8};
-    end
-    M.amounts(dataID) = parTemp(dataID + n);
-    n = n + length(dataID);
-end
-
-x0 = M.amounts;
-tspan = [0 15];
-odeDir = sprintf('@%s.ODE.ode',varargin{3});
-ode = eval(odeDir);
-[t,x] = ode45(@(t,x)ode(t,x,M),tspan,x0);
-
-feature = polyarea(t,x(:,2));
+feature = x(9)/x(10);
 
 end

@@ -1,49 +1,47 @@
 function MPSA( varargin )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-% varargin: model,repeats,dummyNr,ifOxygen,dataType,dataID,dataType,dataID
+% varargin: model,repeats,dataType,value,dataType,dataID,dataType,dataID
 %           1     2       3        4       5         6     7        8
-celldisp(varargin);
 
-% get the model directory and intialize the model
-modelDir = sprintf('%s.ODE.initialize()',varargin{1});
+%% load values from varargin or default
+modelType   = varargin{1};
+repeats     = varargin{2};
+i = 4;
+while i <= nargin
+    switch varargin{i-1}
+        case 'dummy'
+            dummyNr = varargin{i};
+        case 'values'
+            valuesID = varargin{i};
+        case 'amounts'
+            amountsID = varargin{i};
+    end
+    i = i + 2;
+end
+if ~exist('dummyNr')
+    dummyNr = 0;
+end
+if ~exist('valuesID')
+    valuesID = 0;
+end
+if ~exist('amountsID')
+    amountsID = 0;
+end
+
+%% get the model directory and intialize the model
+modelDir = sprintf('%s.ODE.initialize()',modelType);
 M = eval(modelDir);
 
-n_Real = 0;
-par0 = double.empty;                        % initialize par0 for origianl values
+n_Real      = 0;
+par0        = double.empty;                        % initialize par0 for origianl values
+par0        = [par0;M.values(valuesID)];
+n_Real      = n_Real + length(valuesID);
+par0        = [par0;M.amounts(amountsID)];
+n_Real      = n_Real + length(amountsID);
+n_Total     = n_Real + dummyNr;
 
-repeats = varargin{2};
-dummyNr = varargin{3};
-
-%if strcmp(varargin{4},'oxygenOn')
-%    par0 = M.oxygen;
-%    n_Real = n_Real + 1;
-%end
-
-if strcmp(varargin{5},'values')||strcmp(varargin{7},'values')
-% determine if the values of varargin{5} and varargin{7} are 'rates'
-    if strcmp(varargin{5},'values')
-        dataID = varargin{6};
-    else
-        dataID = varargin{8};
-    end
-    par0 = [par0;M.values(dataID)'];
-    n_Real = n_Real + length(dataID);
-end
-
-if strcmp(varargin{5},'amounts')||strcmp(varargin{7},'amounts')
-% determine if the values of varargin{5} and varargin{7} are 'amounts'
-    if strcmp(varargin{5},'amounts')
-        dataID = varargin{6};
-    else
-        dataID = varargin{8};
-    end
-    par0 = [par0;M.amounts(dataID)'];
-    n_Real = n_Real + length(dataID);
-end
-
-n_Total = n_Real + dummyNr;
-scale = lhsdesign(repeats, n_Total); % random uniform distributed parameter sets (values [0,1])
+scale = lhsdesign(repeats, n_Total);                % random uniform distributed parameter sets (values [0,1])
 scale = scale * 2 - 1;          % rescale to bound (-1, 1)
 scale = 10.^scale;              % rescale to logarithm
 
@@ -56,10 +54,10 @@ for i = n_Real+1 : n_Total
     parVar(:,i) = scale(:,i);
 end
 
-feature0 = SA.getSAfeature(par0,M,varargin{[1 4 5 6 7 8]})
+feature0 = SA.getSAfeature(par0,M,dummyNr,valuesID,amountsID);
 for j = 1 : repeats
     parTemp=parVar(j,1:n_Real); 
-    feature = SA.getSAfeature(parTemp,M,varargin{[1 4 5 6 7 8]});
+    feature = SA.getSAfeature(parTemp,M,dummyNr,valuesID,amountsID);
     V(j) = (feature0-feature).^2;
 end
 

@@ -80,4 +80,7 @@ M.values(M.parameters.x3c) = 0.389;
 M.parameters.toID('oxygen') = M.parameters.oxygen;
 M.values(M.parameters.oxygen) = 0.0;
 
+M.amounts = M.amounts(:);
+M.values = M.values(:);
+
 end

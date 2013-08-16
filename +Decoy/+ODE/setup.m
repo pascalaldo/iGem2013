@@ -38,4 +38,6 @@ O.amounts(O.species.P) = newam(O.species.P);
 O.amounts(O.species.TP) = newam(O.species.TP);
 O.amounts(O.species.P0) = newam(O.species.P0);
 
+O.values = O.values(:);
+O.amounts = O.amounts(:);
 end
