@@ -41,28 +41,28 @@ beautify(gcf,plt,3);
 
 clear t x
 
-if model ~= 1
-    tic;
-    O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
-    xs = [];
-    for i=O2
-        d(sprintf('[oxygen] = %f',i));
-        if model == 2
-            M.oxygen = i;
-        else
-            M.FNR.oxygen = i;
-        end
-        xs = [xs; Tools.steadystate(50, M)];
-    end
-    toc
-    figure;
-    plt = loglog(O2',xs);
-    legend(leg);
-    xlabel('oxygen concentration (µM)');
-    ylabel('concentration (µM)');
-    title('Steady states of the FNR model')
-    
-    beautify(gcf,plt,3);
-    
-    clear x0 tspan;
-end
+% if model ~= 1
+%     tic;
+%     O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
+%     xs = [];
+%     for i=O2
+%         d(sprintf('[oxygen] = %f',i));
+%         if model == 2
+%             M.oxygen = i;
+%         else
+%             M.FNR.oxygen = i;
+%         end
+%         xs = [xs; Tools.steadystate(50, M)];
+%     end
+%     toc
+%     figure;
+%     plt = loglog(O2',xs);
+%     legend(leg);
+%     xlabel('oxygen concentration (µM)');
+%     ylabel('concentration (µM)');
+%     title('Steady states of the FNR model')
+%     
+%     beautify(gcf,plt,3);
+%     
+%     clear x0 tspan;
+% end
