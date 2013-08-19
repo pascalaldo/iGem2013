@@ -13,103 +13,37 @@ function M = initialize()
 %   .oxygen                     - The concentrations of oxygen
 %   .amounts(nr)                - Initial concentrations
 
-M.info.model = 'FNR';
-M.info.species = 3;
+S.info.model = 'FNR';
+S.info.species = 3;
 
-d('------ Species ------');
-M.species.toName = containers.Map('KeyType','uint32','ValueType','char');
-M.species.toID = containers.Map('KeyType','char','ValueType','uint32');
+%% Species
+S.species.toName = containers.Map('KeyType','uint32','ValueType','char');
+S.species.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-M.species.toName(1) = 'FNR mRNA';
-M.species.toID('FNR mRNA') = 1;
-d('- Added species `FNR-mRNA`');
+S.species.FNRmRNA       = 1;
+S.species.InactiveFNR   = 2;
+S.species.ActiveFNR     = 3;
 
-M.species.toName(2) = 'Inactive FNR';
-M.species.toID('Inactive FNR') = 2;
-d('- Added species `Inactive FNR`');
+%% Paramters
+S.parameters.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-M.species.toName(3) = 'Active FNR';
-M.species.toID('Active FNR') = 3;
-d('- Added species `Active FNR`');
+S.parameters.a1 = 1;
+S.parameters.a1max = 2;
+S.parameters.a21 = 3;
+S.parameters.a22 = 4;
+S.parameters.b22 = 5;
+S.parameters.b1a = 6;
+S.parameters.b1n = 7;
+S.parameters.b21a = 8;
+S.parameters.b21n = 9;
+S.parameters.b31a = 10;
+S.parameters.b31n = 11;
+S.parameters.g13 = 12;
+S.parameters.x4 = 13;
+S.parameters.x5 = 14;
+S.parameters.x3c = 15;
+S.parameters.oxygen = 16;
 
-M.toID = containers.Map('KeyType','char','ValueType','uint32');
-i = 1;
-
-M.toID('mRNA') = i;
-M.values(i) = 0.16;
-
-i = i+1;
-M.toID('inactiveFNR') = i;
-M.values(i) = 4.63;
-
-i = i+1;
-M.toID('activeFNR') = i;
-M.values(i) = 0.08;
-
-i = i+1;
-M.toID('a1') = i;
-M.values(i) = 0.0871;
-
-i = i+1;
-M.toID('a1max') = i;
-M.values(i) = 0.135;
-
-i = i+1;
-M.toID('a21') = i;
-M.values(i) = 0.484;
-
-i = i+1;
-M.toID('a22') = i;
-M.values(i) = 4.09;
-
-i = i+1;
-M.toID('b22') = i;
-M.values(i) = 2.6;
-
-i = i+1;
-M.toID('b1a') = i;
-M.values(i) = 0.838;
-
-i = i+1;
-M.toID('b1n') = i;
-M.values(i) = 0.613;
-
-i = i+1;
-M.toID('b21a') = i;
-M.values(i) = 0.0821;
-
-i = i+1;
-M.toID('b21n') = i;
-M.values(i) = 0.0634;
-
-i = i+1;
-M.toID('b31a') = i;
-M.values(i) = 0.0231;
-
-i = i+1;
-M.toID('b31n') = i;
-M.values(i) = 0.0148;
-
-i = i+1;
-M.toID('g13') = i;
-M.values(i) = -0.464;
-
-i = i+1;
-M.toID('x4') = i;
-M.values(i) = 0.196;
-
-i = i+1;
-M.toID('x5') = i;
-M.values(i) = 0.455;
-
-i = i+1;
-M.toID('x3c') = i;
-M.values(i) = 0.389;
-
-M.oxygen = 0;
-
-M.amounts(1) = 0.16;
-M.amounts(2) = 4.63;
-M.amounts(3) = 0.08;
+M = FNR.ODE.setup(S);
 
 end

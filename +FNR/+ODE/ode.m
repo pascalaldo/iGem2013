@@ -10,43 +10,45 @@ function f = ode(t,x,M)
 % 2 - inactive FNR
 % 3 - active FNR
 
-env = (M.oxygen<10)+1;
-
 %% State Variables
-x1 = x(1); % FNR mRNA
-x2 = x(2); % Inactive FNR
-x3 = x(3); % Active FNR
+x1 = x(M.species.FNRmRNA); % FNR mRNA
+x2 = x(M.species.InactiveFNR); % Inactive FNR
+x3 = x(M.species.ActiveFNR); % Active FNR
 
 %% Parameters [uM]
 % par(1) = off state (aerobic)
 % par(2) = on state (anaerobic)
 % See the details of indices in M.toID
 
-a1      = M.values(4);
-a1max   = M.values(5);
-a21     = M.values(6);
-a22     = M.values(7);
-b22     = M.values(8);
-b1(1)   = M.values(9);
-b1(2)   = M.values(10);
-b21(1)  = M.values(11);
-b21(2)  = M.values(12);
-b31(1)  = M.values(13);
-b31(2)  = M.values(14);
-g13     = M.values(15);
-x4      = M.values(16);
-x5      = M.values(17);
-x6      = M.oxygen;
-x3c     = M.values(18);
+a1      = M.values(M.parameters.a1);
+a1max   = M.values(M.parameters.a1max);
+a21     = M.values(M.parameters.a21);
+a22     = M.values(M.parameters.a22);
+b22     = M.values(M.parameters.b22);
+b1(1)   = M.values(M.parameters.b1a);
+b1(2)   = M.values(M.parameters.b1n);
+b21(1)  = M.values(M.parameters.b21a);
+b21(2)  = M.values(M.parameters.b21n);
+b31(1)  = M.values(M.parameters.b31a);
+b31(2)  = M.values(M.parameters.b31n);
+g13     = M.values(M.parameters.g13);
+x4      = M.values(M.parameters.x4);
+x5      = M.values(M.parameters.x5);
+x6      = M.values(M.parameters.oxygen);
+x3c     = M.values(M.parameters.x3c);
+
+env = (x6<10)+1;
+
+f = zeros(M.info.species,1);
 
 %% ODEs
 if x3 < x3c
-    f(1) = a1max - b1(env)*x1;
+    f(M.species.FNRmRNA) = a1max - b1(env)*x1;
 else
-    f(1) = a1*(x3^g13) - b1(env)*x1;
+    f(M.species.FNRmRNA) = a1*(x3^g13) - b1(env)*x1;
 end
-f(2) = a21*x1 + 2*a22*x3*x6 - b21(env)*x2*x4 - 2*b22*(x2^2)*x5;
-f(3) = b22*(x2^2)*x5 - a22*x3*x6 - b31(env)*x3;
+f(M.species.InactiveFNR) = a21*x1 + 2*a22*x3*x6 - b21(env)*x2*x4 - 2*b22*(x2^2)*x5;
+f(M.species.ActiveFNR) = b22*(x2^2)*x5 - a22*x3*x6 - b31(env)*x3;
 
 f = f(:);
 
