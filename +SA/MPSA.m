@@ -1,9 +1,17 @@
 function MPSA( varargin )
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
-% varargin: 
-% model,repeats,outName,dataType,count,dataType,dataID,dataType,dataID
-%   1     2       3        4       5         6     7        8     9
+%SA.MPSA Global Sensitivity Analysis
+%parameters
+%   SA.MPSA(varargin) runs a global sensitivity analysis over the chosen
+%   parameters
+% 
+% SA.MPSA(modelType,repeats,outputOfInterest,dataType,dataNr,dataType,dataNr,
+% dataType,dataNr)
+% NOTE:
+% At least one dataType(values/amounts) should be specified to run a proper
+% sensitivity analysis. Also make sure that the outputOfInterest EXIST in
+% the chosen modelType.
+% a fully-specified example:
+% SA.MPSA('Merged',5,'TP','dummy',1,'values',[1 2],'amounts',[1 2])
 
 %% load values from varargin or default
 modelType   = varargin{1};

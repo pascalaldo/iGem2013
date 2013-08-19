@@ -1,5 +1,7 @@
 function feature = getSAfeature(parTemp,M,outID,valuesID,amountsID)
-%
+% get features for sensitivity analysis
+% the feature is the steady state value of outputOfInterest (specified in
+% the function MPSA)
 
 n = 0;                                  % ID counter
 
