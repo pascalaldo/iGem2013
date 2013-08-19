@@ -15,6 +15,18 @@ f(O.species.T) = f(O.species.T) + x(O.species.TP)*O.values(O.parameters.Kpmin) -
 f(O.species.P) = f(O.species.P) + x(O.species.TP)*O.values(O.parameters.Kpmin) - x(O.species.P)*x(O.species.T)*O.values(O.parameters.Kpplus);
 f(O.species.TP) = f(O.species.TP) - x(O.species.TP)*O.values(O.parameters.Kpmin) + x(O.species.P)*x(O.species.T)*O.values(O.parameters.Kpplus);
 
+f(O.species.T) = f(O.species.T) + x(O.species.PT)*O.values(O.parameters.Kpmin) - x(O.species.P)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.P) = f(O.species.P) + x(O.species.PT)*O.values(O.parameters.Kpmin) - x(O.species.P)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.PT) = f(O.species.PT) - x(O.species.PT)*O.values(O.parameters.Kpmin) + x(O.species.P)*x(O.species.T)*O.values(O.parameters.Kpplus);
+
+f(O.species.T) = f(O.species.T) + x(O.species.TPT)*O.values(O.parameters.Kpmin) - x(O.species.TP)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.TP) = f(O.species.TP) + x(O.species.TPT)*O.values(O.parameters.Kpmin) - x(O.species.TP)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.TPT) = f(O.species.TPT) - x(O.species.TPT)*O.values(O.parameters.Kpmin) + x(O.species.TP)*x(O.species.T)*O.values(O.parameters.Kpplus);
+
+f(O.species.T) = f(O.species.T) + x(O.species.TPT)*O.values(O.parameters.Kpmin) - x(O.species.PT)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.PT) = f(O.species.PT) + x(O.species.TPT)*O.values(O.parameters.Kpmin) - x(O.species.PT)*x(O.species.T)*O.values(O.parameters.Kpplus);
+f(O.species.TPT) = f(O.species.TPT) - x(O.species.TPT)*O.values(O.parameters.Kpmin) + x(O.species.PT)*x(O.species.T)*O.values(O.parameters.Kpplus);
+
 f = f(:);
 
 end

@@ -33,7 +33,7 @@ f(M.species.TP) = f(M.species.TP) - b31(env)*x(M.species.TP);
 
 f(M.species.T0) = f(M.species.T)+f(M.species.TN)+f(M.species.TP); % T0, total T
 f(M.species.N0) = f(M.species.N)+f(M.species.TN); % T0, total T
-f(M.species.P0) = f(M.species.P)+f(M.species.TP); % T0, total T
+f(M.species.P0) = f(M.species.P)+f(M.species.TP)+f(M.species.PT)+f(M.species.TPT); % T0, total T
 
 f = f(:);
 

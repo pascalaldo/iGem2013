@@ -15,8 +15,8 @@ function M = initialize()
 %   .oxygen                                 - oxygen concentrations
 
 S.info.model = 'Merged';
-S.info.species = 10;
-S.info.reactions = 2;
+S.info.species = 12;
+S.info.reactions = 5;
 S.info.rules = 3;
 S.info.volume = 0.6E-15;    % the volume of E.ocli in L
 S.info.NA = 6.023E23;       % the Avogadro's constant
@@ -36,13 +36,18 @@ S.species.TN            = 6;
 S.species.N0            = 7;
 S.species.P             = 8;
 S.species.TP            = 9;
-S.species.P0            = 10;
+S.species.PT            = 10;
+S.species.TPT           = 11;
+S.species.P0            = 12;
 
 %% Reactions
 S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
 S.reaction.TpN_TN  = 1;
 S.reaction.TpP_TP  = 2;
+S.reaction.PpT_PT  = 3;
+S.reaction.TPpT_TPT  = 4;
+S.reaction.PTpT_TPT  = 5;
 
 %% Rules
 S.rule.T0 = 1;

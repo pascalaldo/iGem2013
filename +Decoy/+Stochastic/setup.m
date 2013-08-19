@@ -70,6 +70,14 @@ M.species.toName(M.species.TP) = 'TP';
 M.species.toID('TP') = M.species.TP;
 d('- Added species `TP`');
 
+M.species.toName(M.species.PT) = 'PT';
+M.species.toID('PT') = M.species.PT;
+d('- Added species `PT`');
+
+M.species.toName(M.species.TPT) = 'TPT';
+M.species.toID('TPT') = M.species.TPT;
+d('- Added species `TPT`');
+
 M.species.toName(M.species.P0) = 'P0';
 M.species.toID('P0') = M.species.P0;
 d('- Added species `P0`');
@@ -79,9 +87,22 @@ d('- Added species `P0`');
 M.stoichiometry(M.species.T,M.reaction.TpN_TN) = -1;
 M.stoichiometry(M.species.N,M.reaction.TpN_TN) = -1;
 M.stoichiometry(M.species.TN,M.reaction.TpN_TN) = 1;
+
 M.stoichiometry(M.species.T,M.reaction.TpP_TP) = -1;
 M.stoichiometry(M.species.P,M.reaction.TpP_TP) = -1;
 M.stoichiometry(M.species.TP,M.reaction.TpP_TP) = 1;
+
+M.stoichiometry(M.species.P,M.reaction.PpT_PT) = -1;
+M.stoichiometry(M.species.T,M.reaction.PpT_PT) = -1;
+M.stoichiometry(M.species.PT,M.reaction.PpT_PT) = 1;
+
+M.stoichiometry(M.species.TP,M.reaction.TPpT_TPT) = -1;
+M.stoichiometry(M.species.T,M.reaction.TPpT_TPT) = -1;
+M.stoichiometry(M.species.TPT,M.reaction.TPpT_TPT) = 1;
+
+M.stoichiometry(M.species.PT,M.reaction.PTpT_TPT) = -1;
+M.stoichiometry(M.species.T,M.reaction.PTpT_TPT) = -1;
+M.stoichiometry(M.species.TPT,M.reaction.PTpT_TPT) = 1;
 
 %% Set the amounts (initial condition)
 M.amounts(M.species.T0,:) = round(500*M.info.copyNumber);
@@ -91,6 +112,8 @@ M.amounts(M.species.TN,:) = round(0*M.info.copyNumber);
 M.amounts(M.species.N0,:) = round(100*M.info.copyNumber);
 M.amounts(M.species.P,:) = round(7*M.info.copyNumber);
 M.amounts(M.species.TP,:) = round(0*M.info.copyNumber);
+M.amounts(M.species.PT,:) = round(0*M.info.copyNumber);
+M.amounts(M.species.TPT,:) = round(0*M.info.copyNumber);
 M.amounts(M.species.P0,:) = round(7*M.info.copyNumber);
 
 %% Reactions
@@ -111,11 +134,35 @@ M.reactions(M.reaction.TpP_TP).mesorate_plus = @(~,~,~,~)(0.0100);
 M.reactions(M.reaction.TpP_TP).mesorate_min = @(~,~,~,~)(0.4200);
 d(M.reactions(M.reaction.TpP_TP).equation);
 
+d(sprintf('Reaction %d:',M.reaction.PpT_PT));
+M.reactions(M.reaction.PpT_PT).equation = 'P + T <-> PT';
+M.reactions(M.reaction.PpT_PT).reactant = [M.species.T M.species.P];
+M.reactions(M.reaction.PpT_PT).product = M.species.PT;
+M.reactions(M.reaction.PpT_PT).mesorate_plus = @(~,~,~,~)(0.0100);
+M.reactions(M.reaction.PpT_PT).mesorate_min = @(~,~,~,~)(0.4200);
+d(M.reactions(M.reaction.PpT_PT).equation);
+
+d(sprintf('Reaction %d:',M.reaction.TPpT_TPT));
+M.reactions(M.reaction.TPpT_TPT).equation = 'TP + T <-> TPT';
+M.reactions(M.reaction.TPpT_TPT).reactant = [M.species.TP M.species.T];
+M.reactions(M.reaction.TPpT_TPT).product = M.species.TPT;
+M.reactions(M.reaction.TPpT_TPT).mesorate_plus = @(~,~,~,~)(0.0100);
+M.reactions(M.reaction.TPpT_TPT).mesorate_min = @(~,~,~,~)(0.4200);
+d(M.reactions(M.reaction.TPpT_TPT).equation);
+
+d(sprintf('Reaction %d:',M.reaction.PTpT_TPT));
+M.reactions(M.reaction.PTpT_TPT).equation = 'PT + T <-> TPT';
+M.reactions(M.reaction.PTpT_TPT).reactant = [M.species.PT M.species.T];
+M.reactions(M.reaction.PTpT_TPT).product = M.species.TPT;
+M.reactions(M.reaction.PTpT_TPT).mesorate_plus = @(~,~,~,~)(0.0100);
+M.reactions(M.reaction.PTpT_TPT).mesorate_min = @(~,~,~,~)(0.4200);
+d(M.reactions(M.reaction.PTpT_TPT).equation);
+
 %% Rules
 
 d('------ Rules ------');
 M.rules(M.rule.T0).expression = 'M.amounts(M.species.T0,i) = M.amounts(M.species.T,i) + M.amounts(M.species.TN,i) + M.amounts(M.species.TP,i);';
 M.rules(M.rule.N0).expression = 'M.amounts(M.species.N0,i) = M.amounts(M.species.N,i) + M.amounts(M.species.TN,i);';
-M.rules(M.rule.P0).expression = 'M.amounts(M.species.P0,i) = M.amounts(M.species.P,i) + M.amounts(M.species.TP,i);';
+M.rules(M.rule.P0).expression = 'M.amounts(M.species.P0,i) = M.amounts(M.species.P,i) + M.amounts(M.species.TP,i) + M.amounts(M.species.PT,i) + M.amounts(M.species.TPT,i);';
 
 end
