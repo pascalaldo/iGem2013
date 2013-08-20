@@ -17,6 +17,9 @@ for i = 1:P.info.compartmentCnt
     end
 end
 
+i = P.info.toID(P.elimination.name);
+M(i,i) = M(i,i) - P.elimination.rate;
+
 M(n-1,n-1) = - P.arterial.Q;
 M(n,n) = -P.venous.Q;
 

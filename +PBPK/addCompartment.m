@@ -5,7 +5,7 @@ function P = addCompartment(M,name,V,Q,K,dir)
 %       .name                           - name of the tissue, e.g., 'liver'
 %       .V                              - portion of body volume
 %       .Q                              - portion of cardiac output
-%       .P                              - tissue : plasma distribution
+%       .K                              - tissue : plasma distribution
 %       .dir                            - 1, from arterial to venous
 %                                       - 0, from venous to arterial
 P = M;
