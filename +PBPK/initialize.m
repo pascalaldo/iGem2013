@@ -37,35 +37,43 @@ P.venous.V              = 0.0557;
 fileID = fopen('+PBPK/compartmentData.txt');
 
 format = '%s %f %f %f';
-% scan category: arterial -> venous
+% scan category: distribution from arterial to venous
 data = textscan(fileID,format,'CommentStyle','//','HeaderLines',6);
 n1 = length(data{2});
 for i = 1:n1
-    P.compartments(i).name  = data{1}{i};
-    P.compartments(i).V     = data{2}(i);
-    P.compartments(i).Q     = data{3}(i);
-    P.compartments(i).K     = data{4}(i);
-    P.compartments(i).dir   = 1;
+    P.distribution(i).name  = data{1}{i};
+    P.distribution(i).V     = data{2}(i);
+    P.distribution(i).Q     = data{3}(i);
+    P.distribution(i).K     = data{4}(i);
+    P.distribution(i).dir   = 1;
     P.info.toID(data{1}{i}) = i;
 end
-% scan category: venous -> arterial
+% scan category: distribution from venous to arterial
 data = textscan(fileID,format,'CommentStyle','//','HeaderLines',3);
 n2 = length(data{2});
 for i = 1 : n2
-    P.compartments(n1+i).name  = data{1}{i};
-    P.compartments(n1+i).V     = data{2}(i);
-    P.compartments(n1+i).Q     = data{3}(i);
-    P.compartments(n1+i).K     = data{4}(i);
-    P.compartments(n1+i).dir   = 0;
+    P.distribution(n1+i).name  = data{1}{i};
+    P.distribution(n1+i).V     = data{2}(i);
+    P.distribution(n1+i).Q     = data{3}(i);
+    P.distribution(n1+i).K     = data{4}(i);
+    P.distribution(n1+i).dir   = 0;
     P.info.toID(data{1}{i})    = n1 + i;
 end
 
-P.info.compartmentCnt   = length(P.compartments);
+P.info.compartmentCnt   = length(P.distribution);
 
-data = textscan(fileID,format,1,'CommentStyle','//','HeaderLines',3);
+% scan category: elimination
+data = textscan(fileID,format,'CommentStyle','//','HeaderLines',3);
 P.elimination.name              = data{1}{1};
 P.elimination.rate              = data{2};
 P.elimination.lo                = data{3};
 P.elimination.hi                = data{4};
+
+% scan category: absorption
+data = textscan(fileID,format,'CommentStyle','//','HeaderLines',3);
+P.absorption.name               = data{1}{1};
+P.absorption.rate               = data{2};
+P.absorption.lo                 = data{3};
+P.absorption.hi                 = data{4};
 
 end

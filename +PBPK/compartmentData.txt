@@ -1,19 +1,19 @@
 Description: This file is for parameters taken from literature. For patient specific parameters, go to initialize.m.
 NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 
-Category: arterial -> venous
-
+Category: distribution from arterial to venous
+======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
 liver           0.25                   0.026                     2
 kidney          0.25                   0.026                     3
-tumor           //target site
+tumor           0.001                  0.001                     5
 //fill in information above here
 
 
 
 
-Category: venous -> arterial
-
+Category: distribution from venous to arterial
+======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
 lung            1                      0.026                     4
 //fill in information above here
@@ -22,13 +22,15 @@ lung            1                      0.026                     4
 
 
 Category: elimination
-
+======================================================================================
 compartment     rate                   lower_bound                upper_bound
 kidney          0.049                  1.6                        5  //from paper
-//fill in information above here
+//fill in information above here. Only one line of compartment supported.
 
 
 
-Category: dose_distribution
-compartment     share_of_dose
-kidney          0.11
+Category: absorption
+======================================================================================
+compartment     rate                   lower_bound                upper_bound
+venous          99                     0                          99
+//fill in information above here. Only one line of compartment supported.
