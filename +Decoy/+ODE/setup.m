@@ -8,8 +8,18 @@ O.parameters.toID('copyNumber') = O.parameters.copyNumber;
 O.parameters.toID('volume') = O.parameters.volume;
 O.parameters.toID('Knplus') = O.parameters.Knplus;
 O.parameters.toID('Knmin') = O.parameters.Knmin;
-O.parameters.toID('Kpplus') = O.parameters.Kpplus;
-O.parameters.toID('Kpmin') = O.parameters.Kpmin;
+
+O.parameters.toID('Kptplus') = O.parameters.Kptplus;
+O.parameters.toID('Kptmin') = O.parameters.Kptmin;
+
+O.parameters.toID('Ktpplus') = O.parameters.Ktpplus;
+O.parameters.toID('Ktpmin') = O.parameters.Ktpmin;
+
+O.parameters.toID('Kpt_tptplus') = O.parameters.Kpt_tptplus;
+O.parameters.toID('Kpt_tptmin') = O.parameters.Kpt_tptmin;
+
+O.parameters.toID('Ktp_tptplus') = O.parameters.Ktp_tptplus;
+O.parameters.toID('Ktp_tptmin') = O.parameters.Ktp_tptmin;
 
 O.values(O.parameters.copyNumber) = 17.5;
 O.values(O.parameters.volume) = 0.6E-15;    % the volume of E.ocli in L
@@ -24,8 +34,17 @@ O.values(O.parameters.Knplus) = megaRatePlus;
 O.values(O.parameters.Knmin) = megaRateMin;
 
 [megaRatePlus,megaRateMin] = Tools.meso2mega(O, O.reaction.TpP_TP);
-O.values(O.parameters.Kpplus) = megaRatePlus;
-O.values(O.parameters.Kpmin) = megaRateMin;
+O.values(O.parameters.Kptplus) = megaRatePlus;
+O.values(O.parameters.Kptmin) = megaRateMin;
+
+O.values(O.parameters.Ktpplus) = megaRatePlus;
+O.values(O.parameters.Ktpmin) = megaRateMin;
+
+O.values(O.parameters.Kpt_tptplus) = megaRatePlus;
+O.values(O.parameters.Kpt_tptmin) = megaRateMin;
+
+O.values(O.parameters.Ktp_tptplus) = megaRatePlus;
+O.values(O.parameters.Ktp_tptmin) = megaRateMin;
 
 newam = Tools.nr2mol(O,O.amounts);
 

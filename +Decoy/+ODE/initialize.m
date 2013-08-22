@@ -63,11 +63,17 @@ S.parameters.toID = containers.Map('KeyType','char','ValueType','uint32');
 
 S.parameters.Knplus = 1;
 S.parameters.Knmin = 2;
-S.parameters.Kpplus = 3;
-S.parameters.Kpmin = 4;
-S.parameters.oxygen = 5;
-S.parameters.copyNumber = 6;
-S.parameters.volume = 7;
+S.parameters.Ktpplus = 3;
+S.parameters.Ktpmin = 4;
+S.parameters.Kptplus = 5;
+S.parameters.Kptmin = 6;
+S.parameters.Ktp_tptplus = 7;
+S.parameters.Ktp_tptmin = 8;
+S.parameters.Kpt_tptplus = 9;
+S.parameters.Kpt_tptmin = 10;
+S.parameters.oxygen = 11;
+S.parameters.copyNumber = 12;
+S.parameters.volume = 13;
 
 O = Decoy.ODE.setup(S);
 
