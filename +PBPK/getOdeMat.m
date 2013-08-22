@@ -10,17 +10,19 @@ M = zeros(dos);
 % distribution
 for i = 1:P.info.compartmentCnt
     if P.distribution(i).dir == 1   % from arterial to venous
-        M(i,i) = -P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V;  % blood outflow
-        M(i,art) = P.distribution(i).Q / P.distribution(i).V;                       % blood inflow
-        M(ven,i) = P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V; % venous inflow
+        M(i,i) = -P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V;  % tissue outflow
+        M(i,art) = P.distribution(i).Q / P.distribution(i).V;                       % tissue inflow
+        M(ven,i) = P.distribution(i).Q / P.distribution(i).K / P.venous.V;          % venous inflow
+        M(art,art) = M(art,art) - P.distribution(i).Q / P.arterial.V;               % arterial outflow
     else                            % from venous to arterial
-        M(i,i) = -P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V;  % blood outflow
-        M(i,ven) = P.distribution(i).Q / P.distribution(i).V;                       % blood inflow
-        M(art,i) = P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V; % arterial inflow
+        M(i,i) = -P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V;  % tissue outflow
+        M(i,ven) = P.distribution(i).Q / P.distribution(i).V;                       % tissue inflow
+        M(art,i) = P.distribution(i).Q / P.distribution(i).K / P.arterial.V;        % arterial inflow
+        M(ven,ven) = M(ven,ven) - P.distribution(i).Q / P.venous.V ;                % venous outflow
     end
 end
-M(art,art)      = - P.arterial.Q;
-M(ven,ven)      = -P.venous.Q;
+% M(art,art)      = - P.arterial.Q;
+% M(ven,ven)      = -P.venous.Q;
 
 % elimination
 i = P.info.toID(P.elimination.name);

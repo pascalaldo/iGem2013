@@ -1,0 +1,702 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     20379,        693]
+NotebookOptionsPosition[     16594,        560]
+NotebookOutlinePosition[     17041,        577]
+CellTagsIndexPosition[     16998,        574]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["PBPK Parameter Calculation", "Title",
+ CellChangeTimes->{{3.586161820240946*^9, 3.5861618302309446`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Global values :", "Section",
+ CellChangeTimes->{{3.586162104773396*^9, 3.586162119765895*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"bodyDensity", " ", "=", " ", "1"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"kg", "/", "L"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"bodyWeight", " ", "=", " ", "75"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"in", " ", "kilogram"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bodyVolume", " ", "=", " ", 
+   FractionBox["bodyWeight", "bodyDensity"]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5861620678257017`*^9, 3.5861620996588845`*^9}, {
+  3.5861638691408153`*^9, 3.5861639204139423`*^9}, {3.5861640587397733`*^9, 
+  3.586164086430542*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Compartment values :", "Section",
+ CellChangeTimes->{{3.586162129195838*^9, 3.5861621451414323`*^9}, {
+  3.5861628785997705`*^9, 3.5861628851714277`*^9}}],
+
+Cell["\<\
+Compartments are:
+1. brain
+2. heart
+3. liver
+4. spleen
+5. kidney
+6. lung
+7. tumor*\
+\>", "Text",
+ CellChangeTimes->{{3.586162886820593*^9, 3.5861629628091908`*^9}, {
+  3.586166553089322*^9, 3.586166555464322*^9}, {3.586167054695322*^9, 
+  3.5861670593693223`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Percent body volume", "Subsection",
+ CellChangeTimes->{{3.586162486960611*^9, 3.586162496062521*^9}}],
+
+Cell["1. Brain", "Text",
+ CellChangeTimes->{{3.586162975756486*^9, 3.586162981161026*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"massRatio", " ", "=", " ", 
+    FractionBox["1", "40"]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"from", " ", "wikipedia"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"brainDensity", " ", "=", "1.05"}], ";", 
+  RowBox[{"(*", 
+   RowBox[{"from", " ", "wikianswers"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   SubscriptBox["V", "brain"], "=", 
+   RowBox[{
+    RowBox[{"massRatio", "*", 
+     FractionBox["bodyDensity", "brainDensity"]}], "//", "N"}]}]}]}], "Input",
+ CellChangeTimes->{{3.5861621667955976`*^9, 3.586162264318349*^9}, {
+  3.586162326953612*^9, 3.5861624030572214`*^9}, {3.5861640941073093`*^9, 
+  3.586164095093408*^9}, {3.5861656871523223`*^9, 3.586165696497322*^9}}],
+
+Cell[BoxData["0.023809523809523808`"], "Output",
+ CellChangeTimes->{3.586165697272322*^9}]
+}, Open  ]],
+
+Cell["2. heart", "Text",
+ CellChangeTimes->{{3.586162990692979*^9, 3.586162996691579*^9}, 
+   3.586163073978307*^9, 3.5861637519230947`*^9, {3.586163811711073*^9, 
+   3.5861638194498463`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"heartVolume", " ", "=", " ", "350"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   SuperscriptBox["mm", "2"], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["V", "heart"], "=", 
+  RowBox[{
+   FractionBox["heartVolume", 
+    RowBox[{"bodyVolume", "*", "1000"}]], "//", "N"}]}]}], "Input",
+ CellChangeTimes->{{3.586163821614063*^9, 3.5861638375316544`*^9}, {
+  3.5861642178496823`*^9, 3.586164224575355*^9}, {3.5861647267452517`*^9, 
+  3.586164862579467*^9}}],
+
+Cell[BoxData["0.004666666666666667`"], "Output",
+ CellChangeTimes->{
+  3.5861647707526417`*^9, {3.58616481885384*^9, 3.5861648644062843`*^9}}]
+}, Open  ]],
+
+Cell["3. liver", "Text",
+ CellChangeTimes->{{3.5861649789228315`*^9, 3.5861649906036634`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"liverMass", " ", "=", " ", "1.5"}], ";"}], " ", 
+  RowBox[{"(*", " ", "kg", " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"liverDensity", " ", "=", " ", "1.06"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["V", "liver"], "=", 
+  RowBox[{
+   FractionBox["liverMass", 
+    RowBox[{"liverDensity", "*", "bodyVolume"}]], "//", "N"}]}]}], "Input",
+ CellChangeTimes->{{3.5861650524464784`*^9, 3.586165064156307*^9}, {
+  3.5861651358543224`*^9, 3.586165177009322*^9}, {3.586165355022322*^9, 
+  3.5861653608923225`*^9}}],
+
+Cell[BoxData["0.01886792452830189`"], "Output",
+ CellChangeTimes->{3.5861651779603224`*^9}]
+}, Open  ]],
+
+Cell["4. spleen", "Text",
+ CellChangeTimes->{{3.586165187940322*^9, 3.5861651936233225`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"spleenMass", "=", "175"}], ";"}], " ", 
+  RowBox[{"(*", " ", "g", " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["V", "spleen"], "=", 
+  RowBox[{
+   FractionBox["spleenMass", 
+    RowBox[{"bodyWeight", "*", "1000"}]], "//", "N"}]}]}], "Input",
+ CellChangeTimes->{{3.5861653304083223`*^9, 3.586165369105322*^9}, {
+  3.5861654234293222`*^9, 3.5861654557623224`*^9}}],
+
+Cell[BoxData["0.0023333333333333335`"], "Output",
+ CellChangeTimes->{{3.5861654456653223`*^9, 3.586165456480322*^9}}]
+}, Open  ]],
+
+Cell["5. kidney", "Text",
+ CellChangeTimes->{{3.5861654690643225`*^9, 3.586165473561322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["V", "kidney"], "=", 
+  SubscriptBox["V", "heart"]}]], "Input",
+ CellChangeTimes->{{3.5861656726633224`*^9, 3.586165718162322*^9}}],
+
+Cell[BoxData["0.004666666666666667`"], "Output",
+ CellChangeTimes->{{3.586165703417322*^9, 3.586165718818322*^9}}]
+}, Open  ]],
+
+Cell["6. lung", "Text",
+ CellChangeTimes->{{3.586166567147322*^9, 3.586166572907322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"lungMass", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["V", "lung"], "=", 
+  RowBox[{
+   FractionBox["lungMass", "bodyWeight"], "//", "N"}]}]}], "Input",
+ CellChangeTimes->{{3.586166736890322*^9, 3.5861667838033223`*^9}}],
+
+Cell[BoxData["0.013333333333333334`"], "Output",
+ CellChangeTimes->{3.586166784581322*^9}]
+}, Open  ]],
+
+Cell["7. tumor (to be decided...)", "Text",
+ CellChangeTimes->{{3.586165728568322*^9, 3.586165745069322*^9}, {
+  3.586166564035322*^9, 3.586166564322322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Percent cardiac output", "Subsubsection",
+ CellChangeTimes->{{3.58616250355427*^9, 3.5861625165125656`*^9}}],
+
+Cell["1. brain", "Text",
+ CellChangeTimes->{{3.586165876247322*^9, 3.586165881235322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "brain"], "=", 
+  RowBox[{
+   RowBox[{"Mean", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["780", 
+       RowBox[{"1600", "*", "4"}]], ",", 
+      FractionBox["708", 
+       RowBox[{"1602", "*", "4"}]]}], "}"}], "]"}], "//", "N"}]}]], "Input",
+ CellChangeTimes->{{3.5861627355214643`*^9, 3.5861628319211035`*^9}}],
+
+Cell[BoxData["0.1161809456928839`"], "Output",
+ CellChangeTimes->{{3.5861627996118727`*^9, 3.586162832738185*^9}}]
+}, Open  ]],
+
+Cell["2. heart", "Text",
+ CellChangeTimes->{{3.586165884023322*^9, 3.586165894016322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "heart"], "=", "1"}]], "Input",
+ CellChangeTimes->{{3.5861659127623224`*^9, 3.586165919798322*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.586165920528322*^9}]
+}, Open  ]],
+
+Cell["3. liver", "Text",
+ CellChangeTimes->{{3.5861659240863223`*^9, 3.5861659354413223`*^9}, {
+  3.5861661144753222`*^9, 3.586166121615322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "liver"], "=", 
+  RowBox[{
+   RowBox[{"Mean", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["423", 
+       RowBox[{"1660", "*", "4"}]], ",", 
+      FractionBox["383", 
+       RowBox[{"1620", "*", "4"}]]}], "}"}], "]"}], "//", "N"}]}]], "Input",
+ CellChangeTimes->{{3.5861661245523224`*^9, 3.586166158681322*^9}}],
+
+Cell[BoxData["0.061404878774356686`"], "Output",
+ CellChangeTimes->{3.5861661593003225`*^9}]
+}, Open  ]],
+
+Cell["4. spleen", "Text",
+ CellChangeTimes->{{3.586166168150322*^9, 3.5861661729153223`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "spleen"], "=", 
+  RowBox[{
+   RowBox[{"Mean", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["195", 
+       RowBox[{"1660", "*", "4"}]], ",", 
+      FractionBox["177", 
+       RowBox[{"1620", "*", "4"}]]}], "}"}], "]"}], "//", "N"}]}]], "Input",
+ CellChangeTimes->{{3.586166251006322*^9, 3.586166288841322*^9}}],
+
+Cell[BoxData["0.028341142347166445`"], "Output",
+ CellChangeTimes->{3.5861662895803223`*^9}]
+}, Open  ]],
+
+Cell["5. kidney", "Text",
+ CellChangeTimes->{{3.586166341666322*^9, 3.586166346404322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "kidney"], "=", 
+  RowBox[{
+   RowBox[{"Mean", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      FractionBox["1325", 
+       RowBox[{"1660", "*", "4"}]], ",", 
+      FractionBox["1120", 
+       RowBox[{"1620", "*", "4"}]]}], "}"}], "]"}], "//", "N"}]}]], "Input",
+ CellChangeTimes->{{3.586166397386322*^9, 3.5861664241193223`*^9}}],
+
+Cell[BoxData["0.1861938494719619`"], "Output",
+ CellChangeTimes->{3.5861664253633223`*^9}]
+}, Open  ]],
+
+Cell["6. lung", "Text",
+ CellChangeTimes->{{3.586166941009322*^9, 3.586166945587322*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Q", "lung"], "=", " ", "1"}]], "Input",
+ CellChangeTimes->{{3.5861669667313223`*^9, 3.586166985973322*^9}, 
+   3.5861670274913225`*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.5861670288503222`*^9}]
+}, Open  ]],
+
+Cell["7. tumor (to be decided ...)", "Text",
+ CellChangeTimes->{{3.586167032114322*^9, 3.5861670437583222`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Partition coefficient", "Subsubsection",
+ CellChangeTimes->{{3.5861628502839394`*^9, 3.586162859581869*^9}}],
+
+Cell["concentration functions:", "Text",
+ CellChangeTimes->{{3.5861686613127007`*^9, 3.5861686807985973`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Cplasma", "[", "t_", "]"}], ":=", 
+  RowBox[{"27.9", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0202"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "5"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Cbrain", "[", "t_", "]"}], ":=", 
+  RowBox[{"3.96", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0172"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "10"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Cheart", "[", "t_", "]"}], ":=", 
+  RowBox[{"28", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0173"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "10"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Cliver", "[", "t_", "]"}], ":=", 
+  RowBox[{"28.83", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0247"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "5"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Cspleen", "[", "t_", "]"}], ":=", 
+  RowBox[{"25.21", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0223"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "10"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Ckidney", "[", "t_", "]"}], ":=", 
+  RowBox[{"49.74", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0267"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "30"}], ")"}]}]]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Clung", "[", "t_", "]"}], ":=", 
+  RowBox[{"19.56", "*", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{
+     RowBox[{"-", "0.0059"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"t", "-", "10"}], ")"}]}]]}]}]}], "Input",
+ CellChangeTimes->{{3.5861687298028536`*^9, 3.5861687693538084`*^9}, {
+   3.5861688130581784`*^9, 3.586168833818254*^9}, {3.586168894176289*^9, 
+   3.586168909723844*^9}, 3.5861693903989067`*^9}],
+
+Cell["1. brain", "Text",
+ CellChangeTimes->{{3.586169394712338*^9, 3.586169406600527*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "brain"], "=", 
+  FractionBox[
+   RowBox[{"Cbrain", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.5861694479066567`*^9, 3.5861694519820642`*^9}, {
+  3.586169500536919*^9, 3.586169509837849*^9}, {3.5861697040492687`*^9, 
+  3.586169705419406*^9}}],
+
+Cell[BoxData["0.193712018490939`"], "Output",
+ CellChangeTimes->{
+  3.5861695111499805`*^9, 3.586169705894453*^9, {3.5861703830051575`*^9, 
+   3.586170388170674*^9}}]
+}, Open  ]],
+
+Cell["2. heart", "Text",
+ CellChangeTimes->{{3.5861695214140067`*^9, 3.586169526335499*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "heart"], "=", 
+  FractionBox[
+   RowBox[{"Cheart", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.586169531755041*^9, 3.5861695369515605`*^9}, {
+  3.5861697076586294`*^9, 3.586169709191783*^9}, {3.586170454171273*^9, 
+  3.5861704842142773`*^9}}],
+
+Cell[BoxData["1.360126651272789`"], "Output",
+ CellChangeTimes->{
+  3.5861695384057055`*^9, 3.5861697096528287`*^9, {3.586170381441001*^9, 
+   3.5861703882216787`*^9}, {3.5861704565455103`*^9, 3.5861704844403*^9}}]
+}, Open  ]],
+
+Cell["3. liver", "Text",
+ CellChangeTimes->{{3.5861695411589813`*^9, 3.5861695515860233`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "liver"], "=", 
+  FractionBox[
+   RowBox[{"Cliver", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.5861695542832937`*^9, 3.5861695590667715`*^9}, {
+  3.5861696498228464`*^9, 3.586169650787943*^9}}],
+
+Cell[BoxData["0.7373370405300524`"], "Output",
+ CellChangeTimes->{
+  3.5861695596558304`*^9, 3.586169651690033*^9, {3.5861703798668437`*^9, 
+   3.586170388274684*^9}}]
+}, Open  ]],
+
+Cell["4. spleen", "Text",
+ CellChangeTimes->{{3.586169562163081*^9, 3.5861695817530403`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "spleen"], "=", 
+  FractionBox[
+   RowBox[{"Cspleen", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.586169577765641*^9, 3.586169586884553*^9}, {
+  3.586169646250489*^9, 3.586169647268591*^9}}],
+
+Cell[BoxData["0.8629608554418607`"], "Output",
+ CellChangeTimes->{
+  3.586169588132678*^9, 3.586169647566621*^9, {3.5861703781976767`*^9, 
+   3.586170388324689*^9}}]
+}, Open  ]],
+
+Cell["5. kidney", "Text",
+ CellChangeTimes->{{3.586169617733638*^9, 3.586169625565421*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "kidney"], "=", 
+  FractionBox[
+   RowBox[{"Ckidney", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.586169630988963*^9, 3.586169643218186*^9}}],
+
+Cell[BoxData["2.1343939656515714`"], "Output",
+ CellChangeTimes->{{3.586169637377602*^9, 3.586169643717236*^9}, {
+  3.5861703763164883`*^9, 3.586170388374694*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "6. lung (take the time value that ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "lung"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " agrees with two articles)"
+}], "Text",
+ CellChangeTimes->{{3.586169591914056*^9, 3.5861696159914637`*^9}, {
+  3.586170819202773*^9, 3.586170843993252*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["K", "lung"], "=", 
+  FractionBox[
+   RowBox[{"Clung", "[", "80", "]"}], 
+   RowBox[{"Cplasma", "[", "80", "]"}]]}]], "Input",
+ CellChangeTimes->{{3.586169602747139*^9, 3.586169605975462*^9}, {
+  3.5861696538312473`*^9, 3.5861696547413383`*^9}, {3.5861708038172345`*^9, 
+  3.586170814897342*^9}}],
+
+Cell[BoxData["2.110363010917982`"], "Output",
+ CellChangeTimes->{
+  3.5861696065715218`*^9, 3.5861696550763717`*^9, {3.586170374013258*^9, 
+   3.5861703884186983`*^9}, {3.586170806364489*^9, 3.5861708154693995`*^9}}]
+}, Open  ]],
+
+Cell["7. tumor (to be decided...)", "Text",
+ CellChangeTimes->{{3.586169719203784*^9, 3.5861697298948526`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["needed GCV concentration", "Section",
+ CellChangeTimes->{{3.5861710667315235`*^9, 3.586171076051455*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"targetConcentration", " ", "=", " ", "10"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"mg", "/", "L"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.586171158756725*^9, 3.58617117471432*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{976, 677},
+WindowMargins->{{205, Automatic}, {Automatic, 38}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "CP936"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 111, 1, 125, "Title"],
+Cell[CellGroupData[{
+Cell[715, 27, 100, 1, 109, "Section"],
+Cell[818, 30, 654, 16, 116, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1509, 51, 160, 2, 109, "Section"],
+Cell[1672, 55, 274, 12, 212, "Text"],
+Cell[CellGroupData[{
+Cell[1971, 71, 107, 1, 44, "Subsection"],
+Cell[2081, 74, 90, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[2196, 79, 748, 18, 135, "Input"],
+Cell[2947, 99, 90, 1, 48, "Output"]
+}, Open  ]],
+Cell[3052, 103, 192, 3, 38, "Text"],
+Cell[CellGroupData[{
+Cell[3269, 110, 515, 13, 95, "Input"],
+Cell[3787, 125, 142, 2, 48, "Output"]
+}, Open  ]],
+Cell[3944, 130, 94, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[4063, 135, 589, 15, 116, "Input"],
+Cell[4655, 152, 91, 1, 48, "Output"]
+}, Open  ]],
+Cell[4761, 156, 93, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[4879, 161, 429, 11, 93, "Input"],
+Cell[5311, 174, 117, 1, 48, "Output"]
+}, Open  ]],
+Cell[5443, 178, 93, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[5561, 183, 170, 4, 48, "Input"],
+Cell[5734, 189, 114, 1, 48, "Output"]
+}, Open  ]],
+Cell[5863, 193, 89, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[5977, 198, 281, 7, 93, "Input"],
+Cell[6261, 207, 90, 1, 48, "Output"]
+}, Open  ]],
+Cell[6366, 211, 158, 2, 38, "Text"],
+Cell[CellGroupData[{
+Cell[6549, 217, 114, 1, 44, "Subsubsection"],
+Cell[6666, 220, 90, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[6781, 225, 368, 11, 66, "Input"],
+Cell[7152, 238, 114, 1, 48, "Output"]
+}, Open  ]],
+Cell[7281, 242, 90, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[7396, 247, 143, 3, 48, "Input"],
+Cell[7542, 252, 70, 1, 48, "Output"]
+}, Open  ]],
+Cell[7627, 256, 145, 2, 38, "Text"],
+Cell[CellGroupData[{
+Cell[7797, 262, 366, 11, 66, "Input"],
+Cell[8166, 275, 92, 1, 48, "Output"]
+}, Open  ]],
+Cell[8273, 279, 93, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[8391, 284, 365, 11, 66, "Input"],
+Cell[8759, 297, 92, 1, 48, "Output"]
+}, Open  ]],
+Cell[8866, 301, 91, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[8982, 306, 369, 11, 66, "Input"],
+Cell[9354, 319, 90, 1, 48, "Output"]
+}, Open  ]],
+Cell[9459, 323, 89, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[9573, 328, 175, 4, 48, "Input"],
+Cell[9751, 334, 72, 1, 48, "Output"]
+}, Open  ]],
+Cell[9838, 338, 112, 1, 38, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9987, 344, 114, 1, 44, "Subsubsection"],
+Cell[10104, 347, 110, 1, 38, "Text"],
+Cell[10217, 350, 1882, 59, 202, "Input"],
+Cell[12102, 411, 90, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[12217, 416, 337, 8, 69, "Input"],
+Cell[12557, 426, 166, 3, 48, "Output"]
+}, Open  ]],
+Cell[12738, 432, 92, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[12855, 437, 337, 8, 69, "Input"],
+Cell[13195, 447, 214, 3, 48, "Output"]
+}, Open  ]],
+Cell[13424, 453, 94, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[13543, 458, 288, 7, 69, "Input"],
+Cell[13834, 467, 167, 3, 48, "Output"]
+}, Open  ]],
+Cell[14016, 473, 93, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[14134, 478, 284, 7, 69, "Input"],
+Cell[14421, 487, 165, 3, 48, "Output"]
+}, Open  ]],
+Cell[14601, 493, 91, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[14717, 498, 235, 6, 69, "Input"],
+Cell[14955, 506, 163, 2, 48, "Output"]
+}, Open  ]],
+Cell[15133, 511, 322, 9, 41, "Text"],
+Cell[CellGroupData[{
+Cell[15480, 524, 335, 8, 69, "Input"],
+Cell[15818, 534, 216, 3, 48, "Output"]
+}, Open  ]],
+Cell[16049, 540, 111, 1, 38, "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16221, 548, 111, 1, 109, "Section"],
+Cell[16335, 551, 231, 5, 48, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
