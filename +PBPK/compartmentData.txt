@@ -28,8 +28,7 @@ Category: elimination
 ======================================================================================
 compartment     rate                   lower_bound                upper_bound
 //kidney          0.049                  1.6                        5  //from paper
-kidney          0.2121                   1.6                        5
-//none            0                      1.6                        5
+kidney          0.7988                 1.6                        5
 //fill in information above here. Only one line of compartment supported.
 
 
