@@ -4,12 +4,12 @@ NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 Category: distribution from arterial to venous
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-brain           0.024                  0.1162                    1
-heart           0.0047                 1                         1.36
-liver           0.019                  0.0614                    1
-spleen          0.0023                 0.0283                    1
-kidney          0.0047                 0.1861                    2.13
-tumor           0.001                  0.001                     1
+brain           0.024                  0.1162                    0.9138
+heart           0.0047                 1                         15.1682
+liver           0.019                  0.0614                    12.2664
+spleen          0.0023                 0.0283                    19.6835
+kidney          0.0047                 0.1861                    39.6907
+//tumor           0.001                  0.001                     1
 //fill in information above here
 
 
@@ -18,7 +18,8 @@ tumor           0.001                  0.001                     1
 Category: distribution from venous to arterial
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-lung            0.013                  1                         2.11
+lung            0.013                  1                         14.2443
+//lungheart       0.0177                 1                         2.90
 //fill in information above here
 
 
@@ -27,7 +28,9 @@ lung            0.013                  1                         2.11
 Category: elimination
 ======================================================================================
 compartment     rate                   lower_bound                upper_bound
-kidney          0.049                  1.6                        5  //from paper
+//kidney          0.049                  1.6                        5  //from paper
+kidney          0.2121                   1.6                        5
+//none            0                      1.6                        5
 //fill in information above here. Only one line of compartment supported.
 
 

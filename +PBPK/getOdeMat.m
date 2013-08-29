@@ -4,8 +4,9 @@ function M = getOdeMat(P)
 
 art     = P.info.compartmentCnt + 1;
 ven     = P.info.compartmentCnt + 2;
-dos     = P.info.compartmentCnt + 3;
-M = zeros(dos);
+% dos     = P.info.compartmentCnt + 3;
+% M = zeros(dos);
+M = zeros(ven);
 
 % distribution
 for i = 1:P.info.compartmentCnt
@@ -30,9 +31,9 @@ M(i,i) = M(i,i) - P.elimination.rate;
 
 % absorption
 % i = P.info.toID(P.absorption.name);
-if strcmp(P.absorption.name,'venous')
-    M(ven,dos) = P.absorption.rate;
-    M(dos,dos) = -P.absorption.rate;
-end
+% if strcmp(P.absorption.name,'venous')
+%     M(ven,dos) = P.absorption.rate;
+%     M(dos,dos) = -P.absorption.rate;
+% end
 
 end
