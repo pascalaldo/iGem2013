@@ -8,7 +8,7 @@ brain           0.024                  0.1162                    0.1150
 heart           0.0047                 1                         0.9514
 liver           0.019                  0.0614                    0.7087
 spleen          0.0023                 0.0283                    1.1676
-kidney          0.0047                 0.1861                    2.0322
+kidney          0.0047                 0.1861                    2.0933
 //tumor           0.001                  0.001                     1
 //fill in information above here
 
@@ -18,7 +18,7 @@ kidney          0.0047                 0.1861                    2.0322
 Category: distribution from venous to arterial
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-lung            0.013                  1                         0.8750
+lung            0.013                  1                         0.8749
 //fill in information above here
 
 
@@ -27,8 +27,7 @@ lung            0.013                  1                         0.8750
 Category: elimination
 ======================================================================================
 compartment     rate                   lower_bound                upper_bound
-//kidney          0.049                  1.6                        5  //from paper
-kidney          0.7988                 1.6                        5
+kidney          0.7784                 1.6                        5
 //fill in information above here. Only one line of compartment supported.
 
 

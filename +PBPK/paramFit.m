@@ -18,3 +18,12 @@ P = PBPK.initialize();
 M = PBPK.getOdeMat(P);
 opt = optimset('display','iter');
 x = lsqnonlin(@(k)PBPK.elsq(k,P,M),k,[],[],opt);
+
+%% fit partition coefficients and elimination rate at the same time
+% result:     2.0933    0.8749    0.7784
+
+clear all
+k = [2.0100 1.2180 0.049];
+P = PBPK.initialize();
+opt = optimset('display','iter');
+x = lsqnonlin(@(k)PBPK.glblsq(k,P),k,[],[],opt);
