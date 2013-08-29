@@ -3,8 +3,6 @@ function y=objectivePBPK(k,P)
 % k - the partition coefficient of 
 % brain, heart, liver, spleen, kidney, lung and elimination rate in kidney
 
-% Ke = [0.0172 0.0173 0.0247 0.0223 0.0267 0.0059];
-
 % art     = P.info.compartmentCnt + 1;
 % ven     = P.info.compartmentCnt + 2;
 % dos     = P.info.compartmentCnt + 3;

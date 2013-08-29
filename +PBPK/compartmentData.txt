@@ -4,11 +4,11 @@ NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 Category: distribution from arterial to venous
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-brain           0.024                  0.1162                    0.9138
-heart           0.0047                 1                         15.1682
-liver           0.019                  0.0614                    12.2664
-spleen          0.0023                 0.0283                    19.6835
-kidney          0.0047                 0.1861                    39.6907
+brain           0.024                  0.1162                    0.1150
+heart           0.0047                 1                         0.9514
+liver           0.019                  0.0614                    0.7087
+spleen          0.0023                 0.0283                    1.1676
+kidney          0.0047                 0.1861                    2.0322
 //tumor           0.001                  0.001                     1
 //fill in information above here
 
@@ -18,8 +18,7 @@ kidney          0.0047                 0.1861                    39.6907
 Category: distribution from venous to arterial
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-lung            0.013                  1                         14.2443
-//lungheart       0.0177                 1                         2.90
+lung            0.013                  1                         0.8750
 //fill in information above here
 
 
