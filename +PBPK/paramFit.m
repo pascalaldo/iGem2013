@@ -27,3 +27,10 @@ k = [2.0100 1.2180 0.049];
 P = PBPK.initialize();
 opt = optimset('display','iter');
 x = lsqnonlin(@(k)PBPK.glblsq(k,P),k,[],[],opt);
+
+%% fit the bacteria growth in tumor
+
+clear all
+k = [1 0 0.01];
+opt = optimset('display','iter');
+x = lsqcurvefit(@PBPK.bglsq,k,[1.0 24 48 96 168],[8.0 171 41 673 637],[],[],opt);
