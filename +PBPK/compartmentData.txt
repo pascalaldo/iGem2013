@@ -1,33 +1,26 @@
 Description: This file is for parameters taken from literature. For patient specific parameters, go to initialize.m.
 NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 
-Category: distribution from arterial to venous
+Category: distribution
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-brain           0.024                  0.1162                    0.1150
-heart           0.0047                 1                         0.9514
-liver           0.019                  0.0614                    0.7087
-spleen          0.0023                 0.0283                    1.1676
-kidney          0.0047                 0.1861                    2.0933
+brain           0.024                  0.1162                    1.2061
+//heart           0.0047                 1                         0.9514
+kidney          0.0047                 0.25                      22.3698
+liver           0.019                  0.227                     8.0587
+spleen          0.0023                 0.028                     13.4601
+lung            0.013                  1                         12.7832
+RapidPerfuse    0.077                  0.2078                    16.3279
+SlowPerfuse     0.077                  0.171                     0.0689
 //tumor           0.001                  0.001                     1
 //fill in information above here
-
-
-
-
-Category: distribution from venous to arterial
-======================================================================================
-compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-lung            0.013                  1                         0.8749
-//fill in information above here
-
 
 
 
 Category: elimination
 ======================================================================================
 compartment     rate                   lower_bound                upper_bound
-kidney          0.7784                 1.6                        5
+kidney          0.0475                 1.6                        5
 //fill in information above here. Only one line of compartment supported.
 
 

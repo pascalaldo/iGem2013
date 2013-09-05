@@ -3,52 +3,69 @@ function y=glblsq(k,P)
 % k - the partition coefficient of 
 % kidney, lung
 
-art     = 7;
-ven     = 8;
+tempa = max(k);
+tempb = min(k);
+k = [k(1:5),tempa,tempb,k(end)];
+
+art     = P.info.compartmentCnt + 1;
+ven     = P.info.compartmentCnt + 2;
+li      = P.info.toID('liver');
+sp      = P.info.toID('spleen');
+% dos     = P.info.compartmentCnt + 3;
+% M = zeros(dos);
 M = zeros(ven);
 
 % distribution
-for i = 1:4
-    M(i,i) = -P.distribution(i).Q / P.distribution(i).K / P.distribution(i).V;  % tissue outflow
-    M(i,art) = P.distribution(i).Q / P.distribution(i).V;        % tissue inflow
-    M(ven,i) = P.distribution(i).Q / P.distribution(i).K / P.venous.V;          % venous inflow
-    M(art,art) = M(art,art) - P.distribution(i).Q / P.arterial.V;% arterial outflow
+for i = 1:P.info.compartmentCnt
+    if i ~= li && i ~= sp
+        if strcmp(P.distribution(i).name,'lung')   % from venous to arterial
+            M(i,i) = M(i,i)-P.distribution(i).Q / k(i) / P.distribution(i).V;  % tissue outflow
+            M(i,ven) = P.distribution(i).Q / P.distribution(i).V;                       % tissue inflow
+            M(art,i) = P.distribution(i).Q / k(i) / P.arterial.V;        % arterial inflow
+            M(ven,ven) = M(ven,ven) - P.distribution(i).Q / P.venous.V ;                % venous outflow
+        else
+            M(i,i) = M(i,i)-P.distribution(i).Q / k(i) / P.distribution(i).V;  % tissue outflow
+            M(i,art) = P.distribution(i).Q / P.distribution(i).V;                       % tissue inflow
+            M(ven,i) = P.distribution(i).Q / k(i) / P.venous.V;          % venous inflow
+            M(art,art) = M(art,art) - P.distribution(i).Q / P.arterial.V;               % arterial outflow
+        end
+    else
+        if i == li
+            M(i,i) = M(i,i) -P.distribution(i).Q / k(i) / P.distribution(i).V;  % liver outflow
+            M(i,art) = (P.distribution(i).Q - P.distribution(sp).Q) / P.distribution(i).V;     % liver inflow
+            M(i,sp)  = P.distribution(sp).Q / k(sp) / P.distribution(i).V;      % liver inflow
+            M(ven,i) = P.distribution(i).Q / k(i) / P.venous.V;                 % venous inflow
+%             M(art,art) = M(art,art) - (P.distribution(i).Q - P.distribution(sp).Q) / P.arterial.V ; % arterial outflow
+            M(art,art) = M(art,art) - P.distribution(i).Q  / P.arterial.V;                      % arterial outflow including spleen
+        else % P.distribution.name = 'spleen'
+            M(i,i) = M(i,i) -P.distribution(i).Q / k(i) / P.distribution(i).V;  % spleen outflow
+            M(i,art)  = P.distribution(i).Q / P.distribution(i).V;                             % spleen inflow
+%             M(art,art) = M(art,art) - P.distribution(i).Q / P.venous.V ;                       % arterial outflow
+        end
+    end
 end
 
-i = 5;
-M(i,i) = -P.distribution(i).Q / k(1) / P.distribution(i).V;  % tissue outflow
-M(i,art) = P.distribution(i).Q / P.distribution(i).V;        % tissue inflow
-M(ven,i) = P.distribution(i).Q / k(1) / P.venous.V;          % venous inflow
-M(art,art) = M(art,art) - P.distribution(i).Q / P.arterial.V;% arterial outflow
-
-i = 6;
-M(i,i) = -P.distribution(i).Q / k(2) / P.distribution(i).V;  % tissue outflow
-M(i,ven) = P.distribution(i).Q / P.distribution(i).V;                       % tissue inflow
-M(art,i) = P.distribution(i).Q / k(2) / P.arterial.V;        % arterial inflow
-M(ven,ven) = M(ven,ven) - P.distribution(i).Q / P.venous.V;                % venous outflow
-
-
+% elimination
 i = P.info.toID(P.elimination.name);
-M(i,i) = M(i,i) - k(3);
+M(i,i) = M(i,i) - k(end);
 
-[t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 50],[0 0 0 0 0 0 0 750]);
+[t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 50],[0 0 0 0 0 0 0 0 750]);
 
 % estimate the apparent elimination rate in kidney
-% [pks,pos] = findpeaks(x(:,5));
-pos = find(t>0.5);
-result = fit(t(pos),x(pos,7),'exp1');
+ki = P.info.toID('kidney');
+pos = find(t>5);
+result = fit(t(pos),x(pos,ki),'exp1');
 Kehat = -result.b;
 
-A = zeros(1,3);
-for i=1:3
-    A(i) = polyarea(t,x(:,i+4)) + x(end,i+4)/Kehat;
+A = zeros(1,9);
+for i=1:9
+    A(i) = polyarea(t,x(:,i)) + x(end,i)/Kehat;
+%     A(i) = polyarea(t,x(:,i));
 end
-R = A./A(3);
-
-Kauc = [2.0100    1.2180];
-% y = (R(1:6) - Kauc(1:6))*(R(1:6) - Kauc(1:6))' + (10*Kehat - 10*0.049)^2;
-y = R(1:2)-Kauc;
-y(3) = (Kehat - 0.049)*10;
+R = A./A(9);
+Kauc = [0.1150 2.0100 0.7087 1.1676 1.2180];
+y = R(1:5) - Kauc;
+y(6) = (Kehat - 0.049)*10;
 y = y(:);
 
 end

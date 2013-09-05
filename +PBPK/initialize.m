@@ -45,20 +45,20 @@ for i = 1:n1
     P.distribution(i).V     = data{2}(i);
     P.distribution(i).Q     = data{3}(i);
     P.distribution(i).K     = data{4}(i);
-    P.distribution(i).dir   = 1;
+%     P.distribution(i).dir   = 1;
     P.info.toID(data{1}{i}) = i;
 end
-% scan category: distribution from venous to arterial
-data = textscan(fileID,format,'CommentStyle','//','HeaderLines',3);
-n2 = length(data{2});
-for i = 1 : n2
-    P.distribution(n1+i).name  = data{1}{i};
-    P.distribution(n1+i).V     = data{2}(i);
-    P.distribution(n1+i).Q     = data{3}(i);
-    P.distribution(n1+i).K     = data{4}(i);
-    P.distribution(n1+i).dir   = 0;
-    P.info.toID(data{1}{i})    = n1 + i;
-end
+% % scan category: distribution from venous to arterial
+% data = textscan(fileID,format,'CommentStyle','//','HeaderLines',3);
+% n2 = length(data{2});
+% for i = 1 : n2
+%     P.distribution(n1+i).name  = data{1}{i};
+%     P.distribution(n1+i).V     = data{2}(i);
+%     P.distribution(n1+i).Q     = data{3}(i);
+%     P.distribution(n1+i).K     = data{4}(i);
+%     P.distribution(n1+i).dir   = 0;
+%     P.info.toID(data{1}{i})    = n1 + i;
+% end
 
 P.info.compartmentCnt   = length(P.distribution);
 
