@@ -11,8 +11,8 @@ liver           0.019                  0.227                     8.0587
 spleen          0.0023                 0.028                     13.4601
 lung            0.013                  1                         12.7832
 RapidPerfuse    0.077                  0.2078                    16.3279
-SlowPerfuse     0.077                  0.171                     0.0689
-//tumor           0.001                  0.001                     1
+SlowPerfuse     0.077                  0.170                     0.0689
+tumor           0.001                  0.001                     0.0689
 //fill in information above here
 
 
