@@ -10,6 +10,8 @@ x0 = zeros(1,P.info.compartmentCnt+2);
 x0(end) = 750;
 [t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 50],x0);
 plot(t,x)
+title('Drug Distribution')
+xlabel('time(h)')
 
 % bacteria part
 k = [0.1939   -0.0555  116.6546];

@@ -4,15 +4,14 @@ NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 Category: distribution
 ======================================================================================
 compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
-brain           0.024                  0.1162                    1.2061
-//heart           0.0047                 1                         0.9514
-kidney          0.0047                 0.25                      22.3698
-liver           0.019                  0.227                     8.0587
-spleen          0.0023                 0.028                     13.4601
-lung            0.013                  1                         12.7832
-RapidPerfuse    0.077                  0.2078                    16.3279
-SlowPerfuse     0.077                  0.170                     0.0689
-tumor           0.001                  0.001                     0.0689
+brain           0.017                  0.1162                    0.1150
+kidney          0.0044                 0.25                      2.1054
+liver           0.026                  0.227                     0.7091
+spleen          0.0023                 0.028                     1.1682
+lung            0.007                  1                         1.2529
+RapidPerfuse    0.025                  0.2078                    2.1054
+SlowPerfuse     0.4875                 0.170                     0.1150
+tumor           0.001                  0.001                     0.1150
 //fill in information above here
 
 
@@ -20,7 +19,7 @@ tumor           0.001                  0.001                     0.0689
 Category: elimination
 ======================================================================================
 compartment     rate                   lower_bound                upper_bound
-kidney          0.0475                 1.6                        5
+kidney          1.2748                 1.6                        5
 //fill in information above here. Only one line of compartment supported.
 
 

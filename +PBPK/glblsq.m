@@ -49,7 +49,7 @@ end
 i = P.info.toID(P.elimination.name);
 M(i,i) = M(i,i) - k(end);
 
-[t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 50],[0 0 0 0 0 0 0 0 750]);
+[t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 50],[0 0 0 0 0 0 0 0 0 750]);
 
 % estimate the apparent elimination rate in kidney
 ki = P.info.toID('kidney');

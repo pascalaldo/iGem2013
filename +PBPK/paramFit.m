@@ -3,10 +3,10 @@
 % the initial value in this file is calculated from paper
 
 %% fit partition coefficients and elimination rate at the same time
-% result:     2.0933    0.8749    0.7784
+% result:     0.1150    2.1054    0.7091    1.1682    1.2529    1.2748
 
 clear all
-k = [0.1150 2.0100 0.7087 1.1676 1.2180 0.196];
+k = [0.1150 2.0100 0.7087 1.6475 1.2180 0.196];
 P = PBPK.initialize();
 opt = optimset('display','iter');
 x = lsqnonlin(@(k)PBPK.glblsq(k,P),k,[],[],opt);
