@@ -3,7 +3,7 @@ NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
 
 Category: distribution
 ======================================================================================
-compartment     percent_body_volume    percent_cardiac_output    partition_coefficient
+compartment     fraction_body_volume    fraction_cardiac_output    partition_coefficient
 brain           0.017                  0.1162                    0.1150
 kidney          0.0044                 0.25                      2.1054
 liver           0.026                  0.227                     0.7091

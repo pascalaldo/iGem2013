@@ -12,6 +12,13 @@ x0(end) = 750;
 plot(t,x)
 title('Drug Distribution')
 xlabel('time(h)')
+% axis([0 5 0 800])
+leg = {};
+for i=1:P.info.compartmentCnt
+    leg = {leg{:}, P.distribution(i).name};
+end
+leg = {leg{:}, 'arterial','venous'};
+legend(leg)
 
 % bacteria part
 k = [0.1939   -0.0555  116.6546];
