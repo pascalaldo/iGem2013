@@ -1,0 +1,31 @@
+Description: This file is for parameters taken from literature. For patient specific parameters, go to initialize.m.
+NOTE: ONLY ADD LINES BEFORE THE COMMENT. DON'T CHANGE THE OTHER LINES!!
+
+Category: distribution
+======================================================================================
+compartment     fraction_body_volume    fraction_cardiac_output    partition_coefficient
+brain           0.017                  0.1162                    0.1150
+kidney          0.0044                 0.25                      2.1054
+liver           0.026                  0.227                     0.7091
+spleen          0.0023                 0.028                     1.1682
+lung            0.007                  1                         1.2529
+RapidPerfuse    0.025                  0.2078                    2.1054
+SlowPerfuse     0.4875                 0.170                     0.1150
+tumor           0.001                  0.001                     0.1150
+//fill in information above here
+
+
+
+Category: elimination
+======================================================================================
+compartment     rate                   lower_bound                upper_bound
+kidney          1.2748                 1.6                        5
+//fill in information above here. Only one line of compartment supported.
+
+
+
+Category: absorption
+======================================================================================
+compartment     rate                   lower_bound                upper_bound
+venous          999                    0                          99
+//fill in information above here. Only one line of compartment supported.
