@@ -1,11 +1,15 @@
 function N = regoesSim(t,alpha,N0)
-% M = PBPK.regoes(t,alpha,N0) simulates the time-kill curve.
+% M = PBPK.regoesSim(t,alpha,N0) simulates the time-kill curve.
+% t, the discreted time vector
+% alpha, the drug concentration
+% N0, the initial bacteria count
 zMIC = 0.03;
 kap = 1;
-psimax = 0.8;
+psimax = 0.1939;
 psimin = -6;
 
 psi = @(alpha) psimax - (psimax - psimin) * (alpha./zMIC).^kap ./ ((alpha./zMIC).^kap - psimin/psimax);
+% 0.1939 is the bacteria growth rate
 tstep = t(:)-[0;t(1:end-1)];
 dec = psi(alpha);
 N(1) = dec(1)*tstep(1)*N0 + N0;
@@ -18,6 +22,9 @@ end
 % N = [N0;N];
 
 figure;
-plot(t,N)
+plot(t,dec);
+figure;
+semilogy(t,N)
+ylim([10^(-4) 10^6])
 
 end
