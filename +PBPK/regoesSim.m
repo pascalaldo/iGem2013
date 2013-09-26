@@ -5,7 +5,7 @@ function N = regoesSim(t,alpha,N0)
 % N0, the initial bacteria count
 zMIC = 0.03;
 kap = 1;
-psimax = 0.1939;
+psimax = 0.0207;
 psimin = -6;
 
 psi = @(alpha) psimax - (psimax - psimin) * (alpha./zMIC).^kap ./ ((alpha./zMIC).^kap - psimin/psimax);
@@ -23,8 +23,13 @@ end
 
 figure;
 plot(t,dec);
+title('Bacteria Growth Rate in Tumor')
+xlabel('time(h)')
 figure;
 semilogy(t,N)
-ylim([10^(-4) 10^6])
+title('Bacteria Density in Tumor')
+xlabel('time(h)')
+ylabel('CFU')
+% ylim([10^(-4) 10^6])
 
 end
