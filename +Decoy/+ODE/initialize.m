@@ -24,8 +24,8 @@ function O = initialize()
 %  .amounts(id)                 - The concentrations[uM] of molecules of each species
 
 S.info.model = 'Decoy';
-S.info.species = 8;
-S.info.reactions = 2;
+S.info.species = 10;
+S.info.reactions = 5;
 S.info.rules = 3;
 S.info.NA = 6.023E23;       % the Avogadro's constant
 
@@ -40,13 +40,18 @@ S.species.TN    = 4;
 S.species.N0    = 5;
 S.species.P     = 6;
 S.species.TP    = 7;
-S.species.P0    = 8;
+S.species.PT    = 8;
+S.species.TPT    = 9;
+S.species.P0    = 10;
 
 %% Reactions
 S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
 S.reaction.TpN_TN  = 1;
 S.reaction.TpP_TP  = 2;
+S.reaction.PpT_PT  = 3;
+S.reaction.TPpT_TPT  = 4;
+S.reaction.PTpT_TPT  = 5;
 
 %% Rules
 S.rule.T0 = 1;
@@ -58,11 +63,19 @@ S.parameters.toID = containers.Map('KeyType','char','ValueType','uint32');
 
 S.parameters.Knplus = 1;
 S.parameters.Knmin = 2;
-S.parameters.Kpplus = 3;
-S.parameters.Kpmin = 4;
-S.parameters.oxygen = 5;
-S.parameters.copyNumber = 6;
-S.parameters.volume = 7;
+S.parameters.Ktpplus = 3;
+S.parameters.Ktpmin = 4;
+S.parameters.Kptplus = 5;
+S.parameters.Kptmin = 6;
+S.parameters.Ktp_tptplus = 7;
+S.parameters.Ktp_tptmin = 8;
+S.parameters.Kpt_tptplus = 9;
+S.parameters.Kpt_tptmin = 10;
+S.parameters.oxygen = 11;
+S.parameters.copyNumber = 12;
+S.parameters.volume = 13;
+S.parameters.expression_tpt = 14;
+S.parameters.expression_pt = 15;
 
 O = Decoy.ODE.setup(S);
 

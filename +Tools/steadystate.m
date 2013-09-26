@@ -17,6 +17,8 @@ tspan = [0 tmax]; %(s)
 %d(sprintf('Simulated time: %d seconds', tspan(2)));
 [t,x] = ode45(@(t,x)ode(t,x,M),tspan,x0); %Runge-Kutta
 
+%figure(5); plot(t,x);
+
 steady = x(end,:);
 
 end
