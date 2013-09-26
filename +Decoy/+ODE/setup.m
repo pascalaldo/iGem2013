@@ -24,16 +24,23 @@ O.parameters.toID('Ktp_tptmin') = O.parameters.Ktp_tptmin;
 O.values(O.parameters.copyNumber) = 17.5;
 O.values(O.parameters.volume) = 0.6E-15;    % the volume of E.ocli in L
 
+O.values(O.parameters.expression_tpt) = 1.665387867223463;
+O.values(O.parameters.expression_pt) = 0;
+
 O.info.volume = O.values(O.parameters.volume);
 O.info.copyNumber = O.values(O.parameters.copyNumber);
 
+O.info.copyNumber = O.parameters.copyNumber;
 O = Decoy.Stochastic.setup(O);
 
-[megaRatePlus,megaRateMin] = Tools.meso2mega(O, O.reaction.TpN_TN);
+%[megaRatePlus,megaRateMin] = Tools.meso2mega(O, O.reaction.TpN_TN);
+megaRatePlus = 0.099345131816798;
+megaRateMin = 0.009847254228745;
+
 O.values(O.parameters.Knplus) = megaRatePlus;
 O.values(O.parameters.Knmin) = megaRateMin;
 
-[megaRatePlus,megaRateMin] = Tools.meso2mega(O, O.reaction.TpP_TP);
+%[megaRatePlus,megaRateMin] = Tools.meso2mega(O, O.reaction.TpP_TP);
 O.values(O.parameters.Kptplus) = megaRatePlus;
 O.values(O.parameters.Kptmin) = megaRateMin;
 
@@ -55,8 +62,8 @@ O.amounts(O.species.TN) = newam(O.species.TN);
 O.amounts(O.species.N0) = newam(O.species.N0);
 O.amounts(O.species.P) = newam(O.species.P);
 O.amounts(O.species.TP) = newam(O.species.TP);
-O.amounts(O.species.TP) = newam(O.species.PT);
-O.amounts(O.species.TP) = newam(O.species.TPT);
+O.amounts(O.species.PT) = newam(O.species.PT);
+O.amounts(O.species.TPT) = newam(O.species.TPT);
 O.amounts(O.species.P0) = newam(O.species.P0);
 
 O.values = O.values(:);

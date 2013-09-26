@@ -107,9 +107,9 @@ M.stoichiometry(M.species.TPT,M.reaction.PTpT_TPT) = 1;
 %% Set the amounts (initial condition)
 M.amounts(M.species.T0,:) = round(500*M.info.copyNumber);
 M.amounts(M.species.T,:) = round(500*M.info.copyNumber);
-M.amounts(M.species.N,:) = round(100*M.info.copyNumber);
-M.amounts(M.species.TN,:) = round(0*M.info.copyNumber);
-M.amounts(M.species.N0,:) = round(100*M.info.copyNumber);
+M.amounts(M.species.N,:) = 0;%round(100*M.info.copyNumber);
+M.amounts(M.species.TN,:) = 0;%round(0*M.info.copyNumber);
+M.amounts(M.species.N0,:) = 0;%round(100*M.info.copyNumber);
 M.amounts(M.species.P,:) = round(7*M.info.copyNumber);
 M.amounts(M.species.TP,:) = round(0*M.info.copyNumber);
 M.amounts(M.species.PT,:) = round(0*M.info.copyNumber);

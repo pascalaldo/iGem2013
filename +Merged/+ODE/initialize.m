@@ -84,7 +84,9 @@ S.parameters.Ktp_tptmin = 24;
 S.parameters.Kpt_tptplus = 25;
 S.parameters.Kpt_tptmin = 26;
 S.parameters.copyNumber = 28;
-S.parameters.volume     = 28;
+S.parameters.volume     = 29;
+S.parameters.expression_tpt = 30;
+S.parameters.expression_pt = 31;
 
 M = Merged.ODE.setup(S);
 

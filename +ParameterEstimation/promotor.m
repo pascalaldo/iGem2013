@@ -10,6 +10,16 @@ M.amounts(M.species.N,:) = 0;
 M.amounts(M.species.TN,:) = 0;
 M.amounts(M.species.N0,:) = 0;
 M.amounts(M.species.TP,:) = 0;
+M.values(M.parameters.Ktpplus) = 0;
+M.values(M.parameters.Ktpmin) = 0;
+M.amounts(M.species.PT,:) = 0;
+M.values(M.parameters.Kptplus) = 0;
+M.values(M.parameters.Kptmin) = 0;
+M.values(M.parameters.Ktp_tptplus) = 0;
+M.values(M.parameters.Ktp_tptmin) = 0;
+M.values(M.parameters.Kpt_tptplus) = 0;
+M.values(M.parameters.Kpt_tptmin) = 0;
+M.amounts(M.species.TPT,:) = 0;
 M.amounts(M.species.P,:) = 0.005; % 5 nM 48bp concensus sites
 M.amounts(M.species.P0,:) = 0.005; % 5 nM 48bp concensus sites
 
@@ -21,8 +31,10 @@ M.info.oxygen = 0;
     function y = modelfunc(par,xdata,S)
         d(sprintf('Plus: %f; Min: %f',par(1),par(2)))
         xs = zeros(length(xdata),S.info.species);
-        S.rates(S.reaction.TpP_TP).megaRatePlus = par(1);
-        S.rates(S.reaction.TpP_TP).megaRateMin = par(2);
+        S.values(S.parameters.Ktpplus) = par(1);
+        S.values(S.parameters.Ktpmin) = par(2);
+        %S.rates(S.reaction.TpP_TP).megaRatePlus = par(1);
+        %S.rates(S.reaction.TpP_TP).megaRateMin = par(2);
         
         for i=1:length(xdata)
             S.amounts(S.species.T,:) = xdata(i);
@@ -33,6 +45,7 @@ M.info.oxygen = 0;
         y = (xs(:,S.species.TP)./xs(:,S.species.P0))';
         %figure(1);
         %plot(xdata,y,'r-',xdata,ydata,'b.');
+        %disp(par);
     end
 
 xdata = [0 0.12 0.23 0.47 0.94 1.8];

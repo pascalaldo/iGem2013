@@ -74,6 +74,8 @@ S.parameters.Kpt_tptmin = 10;
 S.parameters.oxygen = 11;
 S.parameters.copyNumber = 12;
 S.parameters.volume = 13;
+S.parameters.expression_tpt = 14;
+S.parameters.expression_pt = 15;
 
 O = Decoy.ODE.setup(S);
 
