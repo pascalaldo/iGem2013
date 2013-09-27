@@ -30,14 +30,22 @@ legend(leg);
 title('Single Run');
 xlabel('Time (s)');
 ylabel('Amount (molecules)');
+
+if model == 3
+    boundP = a(M.species.TP,:) + a(M.species.PT,:) + a(M.species.TPT,:);
+    figure;
+    plot(t,boundP./a(M.species.P0,:));
+end
+
 clear t a;
 
-[t,a] = Tools.evaluate(M,10,tmax);
-
-figure;
-plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
-legend(leg);
-title('Multiple Runs');
-xlabel('Time (s)');
-ylabel('Amount (molecules)');
-clear i M t a leg;
+% 
+% [t,a] = Tools.evaluate(M,10,tmax);
+% 
+% figure;
+% plot(t,a,'LineStyle','none','Marker','.','MarkerSize',1);
+% legend(leg);
+% title('Multiple Runs');
+% xlabel('Time (s)');
+% ylabel('Amount (molecules)');
+% clear i M t a leg;

@@ -14,13 +14,13 @@ function M = initialize()
 %   .amounts(id)                            - initial concentrations
 %   .oxygen                                 - oxygen concentrations
 
-S.info.model = 'Merged';
-S.info.species = 10;
-S.info.reactions = 2;
-S.info.rules = 3;
-S.info.volume = 0.6E-15;    % the volume of E.ocli in L
-S.info.NA = 6.023E23;       % the Avogadro's constant
-S.info.copyNumber = 17.5;
+S.info.model            = 'Merged';
+S.info.species          = 12;
+S.info.reactions        = 5;
+S.info.rules            = 3;
+S.info.volume           = 0.6E-15;    % the volume of E.ocli in L
+S.info.NA               = 6.023E23;       % the Avogadro's constant
+S.info.copyNumber       = 17.5;
 
 %% Species
 S.species.toName = containers.Map('KeyType','uint32','ValueType','char');
@@ -36,44 +36,57 @@ S.species.TN            = 6;
 S.species.N0            = 7;
 S.species.P             = 8;
 S.species.TP            = 9;
-S.species.P0            = 10;
+S.species.PT            = 10;
+S.species.TPT           = 11;
+S.species.P0            = 12;
 
 %% Reactions
 S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
 
-S.reaction.TpN_TN  = 1;
-S.reaction.TpP_TP  = 2;
+S.reaction.TpN_TN       = 1;
+S.reaction.TpP_TP       = 2;
+S.reaction.PpT_PT       = 3;
+S.reaction.TPpT_TPT     = 4;
+S.reaction.PTpT_TPT     = 5;
 
 %% Rules
-S.rule.T0 = 1;
-S.rule.N0 = 2;
-S.rule.P0 = 3;
+S.rule.T0               = 1;
+S.rule.N0               = 2;
+S.rule.P0               = 3;
 
 %% Paramters
 S.parameters.toID = containers.Map('KeyType','char','ValueType','uint32');
 
-S.parameters.a1 = 1;
-S.parameters.a1max = 2;
-S.parameters.a21 = 3;
-S.parameters.a22 = 4;
-S.parameters.b22 = 5;
-S.parameters.b1a = 6;
-S.parameters.b1n = 7;
-S.parameters.b21a = 8;
-S.parameters.b21n = 9;
-S.parameters.b31a = 10;
-S.parameters.b31n = 11;
-S.parameters.g13 = 12;
-S.parameters.x4 = 13;
-S.parameters.x5 = 14;
-S.parameters.x3c = 15;
-S.parameters.oxygen = 16;
-S.parameters.Knplus = 17;
-S.parameters.Knmin = 18;
-S.parameters.Kpplus = 19;
-S.parameters.Kpmin = 20;
-S.parameters.copyNumber = 21;
-S.parameters.volume = 22;
+S.parameters.a1         = 1;
+S.parameters.a1max      = 2;
+S.parameters.a21        = 3;
+S.parameters.a22        = 4;
+S.parameters.b22        = 5;
+S.parameters.b1a        = 6;
+S.parameters.b1n        = 7;
+S.parameters.b21a       = 8;
+S.parameters.b21n       = 9;
+S.parameters.b31a       = 10;
+S.parameters.b31n       = 11;
+S.parameters.g13        = 12;
+S.parameters.x4         = 13;
+S.parameters.x5         = 14;
+S.parameters.x3c        = 15;
+S.parameters.oxygen     = 16;
+S.parameters.Knplus     = 17;
+S.parameters.Knmin      = 18;
+S.parameters.Ktpplus    = 19;
+S.parameters.Ktpmin     = 20;
+S.parameters.Kptplus    = 21;
+S.parameters.Kptmin     = 22;
+S.parameters.Ktp_tptplus = 23;
+S.parameters.Ktp_tptmin = 24;
+S.parameters.Kpt_tptplus = 25;
+S.parameters.Kpt_tptmin = 26;
+S.parameters.copyNumber = 28;
+S.parameters.volume     = 29;
+S.parameters.expression_tpt = 30;
+S.parameters.expression_pt = 31;
 
 M = Merged.ODE.setup(S);
 

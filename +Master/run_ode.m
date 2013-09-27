@@ -39,30 +39,106 @@ title('Anaerobic FNR model simulation')
 
 beautify(gcf,plt,3);
 
+figure;
+plt = plot(t,Tools.expressionrate(M,x));
+xlabel('time (min)');
+ylabel('concentration (µM)');
+title('Expression Rate')
+
+beautify(gcf,plt,1);
+
 clear t x
 
-% if model ~= 1
-%     tic;
-%     O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
-%     xs = [];
-%     for i=O2
-%         d(sprintf('[oxygen] = %f',i));
-%         if model == 2
-%             M.oxygen = i;
-%         else
-%             M.FNR.oxygen = i;
-%         end
-%         xs = [xs; Tools.steadystate(50, M)];
-%     end
-%     toc
-%     figure;
-%     plt = loglog(O2',xs);
-%     legend(leg);
-%     xlabel('oxygen concentration (µM)');
-%     ylabel('concentration (µM)');
-%     title('Steady states of the FNR model')
-%     
-%     beautify(gcf,plt,3);
-%     
-%     clear x0 tspan;
-% end
+if model ~= 1 && false
+    tic;
+    O2 = 10.^sort([[-1:0.1:2.0] 0.999999]);
+    dec = 0:25:200;
+    xss = [];
+    for ndec=dec
+        newam = Tools.nr2mol(M,ndec*M.info.copyNumber)
+        M.amounts(M.species.N,:) = newam;
+        M.amounts(M.species.N0,:) = newam;
+        xs = [];
+        for i=O2
+            d(sprintf('[oxygen] = %f',i));
+            M.values(M.parameters.oxygen) = i;
+            xs = [xs; Tools.expressionrate(M,Tools.steadystate(50, M))];
+        end
+        xss = [xss, xs];
+    end
+    toc
+    figure(5);
+    plt = loglog(O2',xss);
+    xlabel('oxygen concentration (µM)');
+    ylabel('concentration (µM)');
+    title('Steady states of the FNR model')
+    
+    beautify(gcf,plt,1);
+    
+    figure(6);
+    plt = plot(O2',xss);
+    xlabel('oxygen concentration (µM)');
+    ylabel('concentration (µM)');
+    title('Steady states of the FNR model')
+    
+    beautify(gcf,plt,1);
+    
+    save('decoydata.mat','xss','02','dec');
+    
+    clear x0 tspan;
+end
+
+if model ~= 1
+    tic;
+    O2 = [50 0];
+    dec = 0:25:200;
+    xs = {};
+    
+    Ktpplus_old = M.values(M.parameters.Ktpplus);
+    Ktpmin_old = M.values(M.parameters.Ktpmin);
+    M.values(M.parameters.Ktpplus) = Ktpplus_old/10;
+    M.values(M.parameters.Ktpmin) = Ktpmin_old*10;
+    M.values(M.parameters.Kptplus) = Ktpplus_old/10;
+    M.values(M.parameters.Kptmin) = Ktpmin_old*10;
+    M.values(M.parameters.Ktp_tptplus) = Ktpplus_old/10;
+    M.values(M.parameters.Ktp_tptmin) = Ktpmin_old*10;
+    M.values(M.parameters.Kpt_tptplus) = Ktpplus_old/10;
+    M.values(M.parameters.Kpt_tptmin) = Ktpmin_old*10;
+    
+    for ndec=dec
+        newam = Tools.nr2mol(M,ndec*M.info.copyNumber)
+        M.amounts(M.species.N,:) = newam;
+        M.amounts(M.species.N0,:) = newam;
+        
+        tspan = [0 200];
+        x0 = M.amounts(:,1);
+        M.values(M.parameters.oxygen) = O2(1);
+        [t1,x1] = ode45(@(t,x)ode(t,x,M),tspan,x0);
+        
+        x0 = x1(end,:);
+        M.values(M.parameters.oxygen) = O2(2);
+        [t2,x2] = ode45(@(t,x)ode(t,x,M),tspan,x0);
+        
+        xtot = [x1; x2];
+        ttot = [t1; (t2+tspan(2))];
+
+        xs = [xs [Tools.expressionrate(M,xtot),ttot]];
+    end
+    toc
+    
+    figure;
+    for i=xs
+        it = i{1};
+        plt = plot(it(:,2),it(:,1));
+        hold on;
+    end
+    xlabel('oxygen concentration (µM)');
+    ylabel('concentration (µM)');
+    title('Steady states of the FNR model')
+    
+    beautify(gcf,plt,1);
+    
+    save('decoydata2.mat','xs','dec');
+    
+    clear x0 tspan;
+end

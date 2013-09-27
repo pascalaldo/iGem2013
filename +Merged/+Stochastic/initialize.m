@@ -2,8 +2,8 @@ function M = initialize()
 % FNR.STOCHASTIC.INITIALIZE
 
 S.info.model = 'Merged';
-S.info.species = 11;
-S.info.reactions = 8;
+S.info.species = 13;
+S.info.reactions = 11;
 S.info.rules = 3;
 S.info.volume = 0.6E-15;    % the volume of E.ocli in L
 S.info.NA = 6.023E23;       % the Avogadro's constant
@@ -43,7 +43,9 @@ S.species.TN            = 7;
 S.species.N0            = 8;
 S.species.P             = 9;
 S.species.TP            = 10;
-S.species.P0            = 11;
+S.species.PT            = 11;
+S.species.TPT           = 12;
+S.species.P0            = 13;
 
 %% Reactions
 S.stoichiometry = sparse(zeros(S.info.species,S.info.reactions));
@@ -54,8 +56,11 @@ S.reaction.Void_ActiveFNR       = 3;
 S.reaction.InactiveFNR_ActiveFNR= 4;
 S.reaction.TpN_TN               = 5;
 S.reaction.TpP_TP               = 6;
-S.reaction.VoidpN_TN            = 7;
-S.reaction.VoidpP_TP            = 8;
+S.reaction.PpT_PT               = 7;
+S.reaction.TPpT_TPT             = 8;
+S.reaction.PTpT_TPT             = 9;
+S.reaction.VoidpN_TN            = 10;
+S.reaction.VoidpP_TP            = 11;
 
 %% Rules
 S.rule.T0 = 1;
