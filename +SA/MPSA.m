@@ -1,4 +1,4 @@
-function MPSA( varargin )
+function [Sa,Su]=MPSA( varargin )
 %SA.MPSA Global Sensitivity Analysis
 %parameters
 %   SA.MPSA(varargin) runs a global sensitivity analysis over the chosen
@@ -11,7 +11,7 @@ function MPSA( varargin )
 % sensitivity analysis. Also make sure that the outputOfInterest EXIST in
 % the chosen modelType.
 % a fully-specified example:
-% SA.MPSA('Merged',5,'TP','dummy',1,'values',[1 2],'amounts',[1 2])
+% SA.MPSA('Merged',5,'TP','dummy',1,'values',[1 2 3],'amounts',[1 2])
 
 %% load values from varargin or default
 modelType   = varargin{1};
