@@ -68,6 +68,7 @@ end
 
 feature0 = SA.getSAfeature(par0,M,outID,valuesID,amountsID);
 for j = 1 : repeats
+    disp(j)
     parTemp=parVar(j,1:n_Real); 
     feature = SA.getSAfeature(parTemp,M,outID,valuesID,amountsID);
     V(j) = (feature0-feature).^2;
