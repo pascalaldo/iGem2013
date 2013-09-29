@@ -34,22 +34,24 @@ for i=1:M.info.species
 end
 legend(leg);
 xlabel('time (min)');
-ylabel('concentration (µM)');
+ylabel('concentration (\muM)');
 title('Anaerobic FNR model simulation')
 
 beautify(gcf,plt,3);
 
-figure;
-plt = plot(t,Tools.expressionrate(M,x));
-xlabel('time (min)');
-ylabel('concentration (µM)');
-title('Expression Rate')
+if model ~= 2
+    figure;
+    plt = plot(t,Tools.expressionrate(M,x));
+    xlabel('time (min)');
+    ylabel('concentration (\muM)');
+    title('Expression Rate')
 
-beautify(gcf,plt,1);
+    beautify(gcf,plt,1);
+end
 
 clear t x
 
-if model ~= 1 && false
+if model == 3
     tic;
     O2 = 10.^sort([[-1:0.1:2.0] 0.999999]);
     dec = 0:25:200;
@@ -69,18 +71,18 @@ if model ~= 1 && false
     toc
     figure(5);
     plt = loglog(O2',xss);
-    xlabel('oxygen concentration (µM)');
-    ylabel('concentration (µM)');
+    xlabel('oxygen concentration (\muM)');
+    ylabel('concentration (\muM)');
     title('Steady states of the FNR model')
     
     beautify(gcf,plt,1);
     
     figure(6);
     plt = plot(O2',xss);
-    xlabel('oxygen concentration (µM)');
+    xlabel('oxygen concentration (\muM)');
     ylabel('concentration (µM)');
     title('Steady states of the FNR model')
-    
+
     beautify(gcf,plt,1);
     
     save('decoydata.mat','xss','02','dec');
@@ -88,7 +90,39 @@ if model ~= 1 && false
     clear x0 tspan;
 end
 
-if model ~= 1
+if model == 2
+    tic;
+    O2 = 10.^sort([[-1:0.1:2.5] 0.999999]);
+    xs = [];
+    for i=O2
+        d(sprintf('[oxygen] = %f',i));
+        M.values(M.parameters.oxygen) = i;
+        xs = [xs; Tools.steadystate(50, M)];
+    end
+    toc
+    
+    figure(5);
+    plt = loglog(O2',xs);
+    xlabel('oxygen concentration (\muM)');
+    ylabel('concentration (\muM)');
+    title('Steady states of the FNR model');
+    legend(leg);
+    
+    beautify(gcf,plt,3);
+    
+    figure(6);
+    plt = plot(O2',xs);
+    xlabel('oxygen concentration (\muM)');
+    ylabel('concentration (\muM)');
+    title('Steady states of the FNR model');
+    legend(leg);
+
+    beautify(gcf,plt,3);
+        
+    clear x0 tspan;
+end
+
+if model == 3
     tic;
     O2 = [50 0];
     dec = 0:25:200;
@@ -132,8 +166,8 @@ if model ~= 1
         plt = plot(it(:,2),it(:,1));
         hold on;
     end
-    xlabel('oxygen concentration (µM)');
-    ylabel('concentration (µM)');
+    xlabel('oxygen concentration (\muM)');
+    ylabel('concentration (\muM)');
     title('Steady states of the FNR model')
     
     beautify(gcf,plt,1);
