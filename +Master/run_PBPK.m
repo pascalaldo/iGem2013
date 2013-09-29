@@ -3,6 +3,26 @@
 close all
 clear M P t x k y
 
+% the result of one time injection
+dose = 6;
+P = PBPK.initialize();
+M = PBPK.getOdeMat(P);
+x0 = zeros(1,P.info.compartmentCnt+2);
+% first injection, day 1
+x0(end) = dose;
+[t,x] = ode45(@(t,x)PBPK.ode(t,x,M),[0 24],x0);
+plot(t,x)
+title('Drug Distribution in Different Compartments')
+xlabel('time(h)')
+ylabel('concentration(mg/L)')
+leg = {};
+for i=1:P.info.compartmentCnt
+    leg = {leg{:}, P.distribution(i).name};
+end
+leg = {leg{:}, 'arterial','venous'};
+legend(leg)
+
+% the result of 3 days injection + time-kill
 % drug part
 dose = 5;
 P = PBPK.initialize();
@@ -11,6 +31,7 @@ x0 = zeros(1,P.info.compartmentCnt+2);
 % first injection, day 1
 x0(end) = dose;
 [t1,x1] = ode45(@(t,x)PBPK.ode(t,x,M),[0 24],x0);
+figure
 plot(t1,x1(:,8))
 hold on;
 % second injection, day 2
@@ -25,6 +46,7 @@ x0(end) = x0(end) + dose;
 plot(t3,x3(:,8))
 title('Drug Distribution in Tumor')
 xlabel('time(h)')
+ylabel('concentration(mg/L)')
 hold off
 
 % figure;

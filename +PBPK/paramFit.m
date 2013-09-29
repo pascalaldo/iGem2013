@@ -12,11 +12,10 @@ opt = optimset('display','iter');
 x = lsqnonlin(@(k)PBPK.glblsq(k,P),k,[],[],opt);
 
 %% fit the bacteria growth in tumor
-% result: 0.1939   -0.0555  116.6546
-% 0.0207  150.0625    0.9988
-% 0.1939 is the bacteria growth rate
-% -0.0555 is the offset in time
-% 116.6546 is proportional to the amount of bacteria injected (1*10^8)
+% result: 0.0207  150.0625    0.9988
+% 0.0207 is the bacteria growth rate
+% 0.9988 is the offset in time
+% 150.0625 is proportional to the amount of bacteria injected (1*10^8)
 close all
 clear all
 k = [0.001 150 1];
