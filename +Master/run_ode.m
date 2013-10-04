@@ -53,9 +53,24 @@ clear t x
 
 if model == 3
     tic;
+    
+    kfac=1;
+    
+    Ktpplus_old = M.values(M.parameters.Ktpplus);
+    Ktpmin_old = M.values(M.parameters.Ktpmin);
+    M.values(M.parameters.Ktpplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Ktpmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Kptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Kptmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Ktp_tptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Ktp_tptmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Kpt_tptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Kpt_tptmin) = Ktpmin_old*kfac;
+    
     O2 = 10.^sort([[-1:0.1:2.0] 0.999999]);
     dec = 0:25:200;
     xss = [];
+    leg = {};
     for ndec=dec
         newam = Tools.nr2mol(M,ndec*M.info.copyNumber)
         M.amounts(M.species.N,:) = newam;
@@ -67,21 +82,23 @@ if model == 3
             xs = [xs; Tools.expressionrate(M,Tools.steadystate(50, M))];
         end
         xss = [xss, xs];
+        leg = [leg, sprintf('%d Decoy Sites',ndec)];
     end
     toc
     figure(5);
     plt = loglog(O2',xss);
     xlabel('oxygen concentration (\muM)');
-    ylabel('concentration (\muM)');
-    title('Steady states of the FNR model')
+    ylabel('expression rate (-)');
+    title('Steady State Expression Rates')
+    legend(leg);
     
     beautify(gcf,plt,1);
     
     figure(6);
     plt = plot(O2',xss);
     xlabel('oxygen concentration (\muM)');
-    ylabel('concentration (µM)');
-    title('Steady states of the FNR model')
+    ylabel('expression rate (-)');
+    title('Steady State Expression Rate')
 
     beautify(gcf,plt,1);
     
@@ -128,17 +145,20 @@ if model == 3
     dec = 0:25:200;
     xs = {};
     
+    kfac=1;
+    
     Ktpplus_old = M.values(M.parameters.Ktpplus);
     Ktpmin_old = M.values(M.parameters.Ktpmin);
-    M.values(M.parameters.Ktpplus) = Ktpplus_old/10;
-    M.values(M.parameters.Ktpmin) = Ktpmin_old*10;
-    M.values(M.parameters.Kptplus) = Ktpplus_old/10;
-    M.values(M.parameters.Kptmin) = Ktpmin_old*10;
-    M.values(M.parameters.Ktp_tptplus) = Ktpplus_old/10;
-    M.values(M.parameters.Ktp_tptmin) = Ktpmin_old*10;
-    M.values(M.parameters.Kpt_tptplus) = Ktpplus_old/10;
-    M.values(M.parameters.Kpt_tptmin) = Ktpmin_old*10;
+    M.values(M.parameters.Ktpplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Ktpmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Kptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Kptmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Ktp_tptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Ktp_tptmin) = Ktpmin_old*kfac;
+    M.values(M.parameters.Kpt_tptplus) = Ktpplus_old/kfac;
+    M.values(M.parameters.Kpt_tptmin) = Ktpmin_old*kfac;
     
+    leg = {};
     for ndec=dec
         newam = Tools.nr2mol(M,ndec*M.info.copyNumber)
         M.amounts(M.species.N,:) = newam;
@@ -157,6 +177,7 @@ if model == 3
         ttot = [t1; (t2+tspan(2))];
 
         xs = [xs [Tools.expressionrate(M,xtot),ttot]];
+        leg = [leg, sprintf('%d Decoy Sites',ndec)];
     end
     toc
     
@@ -167,8 +188,9 @@ if model == 3
         hold on;
     end
     xlabel('oxygen concentration (\muM)');
-    ylabel('concentration (\muM)');
-    title('Steady states of the FNR model')
+    ylabel('expression rate (-)');
+    title('Response to Change in Oxygen Concentration');
+    legend(leg);
     
     beautify(gcf,plt,1);
     
