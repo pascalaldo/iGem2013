@@ -2,10 +2,16 @@
 
 close all
 clear M P t x k y
-
+bodyWeight = 75;   % kg
+%%
 % the result of one time injection
-dose = 6;
+% dose = 6;
+doseM = 23.21;        % mg
 P = PBPK.initialize();
+bodyVolume = bodyWeight / 0.9; % L
+venVolume = bodyVolume * P.venous.V;
+dose = doseM / venVolume;
+
 M = PBPK.getOdeMat(P);
 x0 = zeros(1,P.info.compartmentCnt+2);
 % first injection, day 1
@@ -22,10 +28,15 @@ end
 leg = {leg{:}, 'arterial','venous'};
 legend(leg)
 
-% the result of 3 days injection + time-kill
+%% the result of 3 days injection + time-kill
 % drug part
-dose = 5;
+% dose = 9;
+doseM = 23.21;     % mg
 P = PBPK.initialize();
+bodyVolume = bodyWeight / 0.9; % L
+venVolume = bodyVolume * P.venous.V;
+dose = doseM / venVolume;
+
 M = PBPK.getOdeMat(P);
 x0 = zeros(1,P.info.compartmentCnt+2);
 % first injection, day 1
@@ -45,7 +56,7 @@ x0(end) = x0(end) + dose;
 [t3,x3] = ode45(@(t,x)PBPK.ode(t,x,M),[48 72],x0);
 plot(t3,x3(:,8))
 title('Drug Distribution in Tumor')
-xlabel('time(h)')
+% xlabel('time(h)')
 ylabel('concentration(mg/L)')
 hold off
 
